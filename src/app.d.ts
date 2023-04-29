@@ -7,6 +7,15 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
+
+	namespace svelteHTML {
+		// enhance attributes
+		interface HTMLAttributes<T extends EventTarget> {
+			// If you want to use on:beforeinstallprompt
+			// 'on:clickOut'?: (event: CustomEvent<HTMLElement>) => void;
+			'on:clickOut'?: MouseEventHandler<CustomEvent<T>>;
+		}
+	}
 }
 
 export {};
