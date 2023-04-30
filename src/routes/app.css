@@ -18,3 +18,13 @@ body {
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
+
+*[data-language='typescript'] {
+	--moz-tab-size: 10;
+	tab-size: 10;
+}
+
+*[data-language='svelte'] {
+	--moz-tab-size: 10;
+	tab-size: 10;
+}

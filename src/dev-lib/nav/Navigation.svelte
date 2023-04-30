@@ -51,7 +51,7 @@
 </script>
 
 <div
-	class="flex p-2 lg:flex-col flex-row overflow-x-auto whitespace-nowrap items-center lg:items-start gap-4 justify-start rounded-lg bg-orange-900/50 lg:p-4 flex-shrink-0 w-full lg:w-auto shadow-lg hover:shadow-black/100 transition-all hover:drop-shadow"
+	class="flex lg:max-w-xs lg:fixed p-2 lg:flex-col flex-row overflow-x-auto whitespace-nowrap items-center lg:items-start gap-4 justify-start rounded-lg bg-orange-900/50 lg:p-4 flex-shrink-0 w-full lg:w-auto shadow-lg hover:shadow-black/100 transition-all hover:drop-shadow"
 >
 	<a class="bg-orange-400 rounded font-bold w-full text-center px-4" href="/"> sveltekit stuff </a>
 

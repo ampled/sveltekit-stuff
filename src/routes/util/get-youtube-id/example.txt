@@ -3,16 +3,14 @@
 
   // also supports shorts (https://www.youtube.com/shorts/M1cz-0G1P38)
   // or youtu.be (https://youtu.be/WIRK_pGdIdA)
-  const youtubeUrl = 'https://www.youtube.com/watch?v=WIRK_pGdIdA';
-  const youtubeId = getYoutubeId(youtubeUrl);
+  export let youtubeUrl = 'https://www.youtube.com/watch?v=WIRK_pGdIdA';
+  $: youtubeId = getYoutubeId(youtubeUrl);
+  $: src = 'https://www.youtube.com/embed/' + youtubeId;
 </script>
 
 <iframe
-  width="1239"
-  height="778"
-  src={`https://www.youtube.com/embed/${youtubeId}`}
-  title="youtube embed"
+  {src}
+  width="1920"
+  height="1080"
   frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-/>
+  allowfullscreen />

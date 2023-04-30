@@ -38,6 +38,14 @@
 		rotation = 45;
 		opacity = 0;
 	}
+
+	const rotateOptions = `interface RotateParams {
+  delay?: number;
+  duration?: number;
+  easing?: EasingFunction;
+  opacity?: number;
+  rotation?: number;
+}`;
 </script>
 
 <Page title="rotate">
@@ -46,6 +54,7 @@
 		element gives more control.
 	</p>
 	<Code {code} />
+	<Code code={rotateOptions} svelte={false} />
 
 	<div class="flex flex-col items-center justify-center relative gap-4">
 		<div class="flex gap-1">

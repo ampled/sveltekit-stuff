@@ -1,14 +1,15 @@
 <script>
   import merge from '@eirikk/svelte-stuff/util/merge';
-</script>
 
-<div
-  class={merge(
+  $: classes = merge(
     'p-2',
     { 'm-5': true },
     undefined,
     null,
     false,
     ['hover:bg-pink-400'],
-    true && 'stroke-indigo-500')}
-/>
+    true && 'stroke-indigo-500'
+);
+</script>
+
+<div class={classes} />

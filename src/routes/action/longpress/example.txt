@@ -1,3 +1,1 @@
-<div
-  use:longpress={200}
-  on:long={handleLongPress}>
+<div use:longpress={200} on:long={handleLongPress} />
