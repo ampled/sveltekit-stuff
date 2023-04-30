@@ -13,6 +13,10 @@
 	import { onMount } from 'svelte';
 </script>
 
+<svelte:head>
+	<title>My Sveltekit Stuff</title>
+</svelte:head>
+
 <div class="container mx-auto min-h-full pt-4">
 	<Navigation />
 	<main>

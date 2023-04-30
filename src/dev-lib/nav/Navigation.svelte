@@ -7,6 +7,7 @@
 	const TRANSITION = '/transition/';
 	const COMPONENTS = '/components/';
 	const UTIL = '/util/';
+	const TYPES = '/types/';
 
 	const navItems: Record<string, Array<{ title: string; href: string; tw?: boolean }>> = {
 		action: [
@@ -45,6 +46,12 @@
 			{
 				href: UTIL + 'get-youtube-id',
 				title: 'getYoutubeId'
+			}
+		],
+		types: [
+			{
+				href: TYPES,
+				title: 'types'
 			}
 		]
 	};

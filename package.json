@@ -1,6 +1,14 @@
 {
 	"name": "@eirikk/sveltekit-stuff",
-	"version": "0.0.1",
+	"description": "An assortment of Sveltekit / tailwind utility and helpers",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ampled/sveltekit-stuff.git"
+	},
+	"license": "MIT",
+	"private": false,
+	"version": "0.0.2",
+	"homepage": "https://sveltekit-stuff-chi.vercel.app",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -11,7 +19,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"format": "prettier --plugin-search-dir . --write .",
+		"publishpackage": "npm publish --access public"
 	},
 	"exports": {
 		".": {
@@ -25,11 +34,11 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"svelte": "^3.54.0"
+		"svelte": "^3.54.0",
+		"@sveltejs/kit": "^1.5.0"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.5.0",
 		"@sveltejs/package": "^2.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
