@@ -1,3 +1,3 @@
 # Sveltekit Stuff
 
-This is a personal library of sveltekit-related stuff.
+This is a personal library of mostly sveltekit/tailwind-related stuff.
