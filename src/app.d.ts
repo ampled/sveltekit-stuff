@@ -14,6 +14,7 @@ declare global {
 			// If you want to use on:beforeinstallprompt
 			// 'on:clickOut'?: (event: CustomEvent<HTMLElement>) => void;
 			'on:clickOut'?: MouseEventHandler<CustomEvent<T>>;
+			'on:long'?: MouseEventHandler<CustomEvent<T>>;
 		}
 	}
 }
