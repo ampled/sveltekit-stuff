@@ -1,0 +1,9 @@
+<script>
+  import { clickOutside } from '@eirikk/sveltekit-stuff';
+
+  function handleClickOut() {
+    console.log('you clicked outside of the div');
+  }
+</script>
+
+<div use:clickOutside on:clickOut={handleClickOut} />

@@ -1,13 +1,12 @@
 <script lang="ts">
+	import Code from '$dlib/Code.svelte';
 	import { clickOutside } from '$lib/action';
 	import { slide } from 'svelte/transition';
+	import example from './example.txt?raw';
+	import { ROUTE_TRANSITION } from '$dlib/const';
+	import Page from '$dlib/Page.svelte';
 
 	let text = 'hey click outside me';
-	let example = `
-	<div
-		use:clickOutside
-		on:clickOut={handleClickOut}
-	/>`;
 
 	function handleClickOut() {
 		text = 'wow you clicked outside me!!!\n\ni cant believe it';
@@ -18,10 +17,8 @@
 	}
 </script>
 
-<div class="flex flex-col h-full items-center justify-center gap-8" transition:slide>
-	<pre class="font-mono whitespace-pre bg-gray-400 p-8">
-		{example}
-	</pre>
+<Page title="Click Outside">
+	<Code code={example} />
 	<div
 		use:clickOutside
 		on:clickOut={handleClickOut}
@@ -29,4 +26,4 @@
 	>
 		{text}
 	</div>
-</div>
+</Page>

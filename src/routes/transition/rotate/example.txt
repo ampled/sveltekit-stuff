@@ -1,0 +1,7 @@
+<script>
+  import { rotate } from '@eirikk/sveltekit-stuff/transition';
+</script>
+
+<div
+  transition:rotate
+/>

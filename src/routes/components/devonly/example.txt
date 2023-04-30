@@ -1,0 +1,7 @@
+<script>
+  import DevOnly from '@eirikk/sveltekit-stuff';
+</script>
+
+<DevOnly>
+  This will only be shown on local dev server
+</DevOnly>
