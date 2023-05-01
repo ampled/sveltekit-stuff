@@ -2,7 +2,11 @@
 	import Navigation from '$dlib/nav/Navigation.svelte';
 	import Breakpoints from '$lib/components/Breakpoints.svelte';
 	import DevOnly from '$lib/components/DevOnly.svelte';
-	import hljs from 'highlight.js/lib/core';
+
+	import badges from 'badges';
+
+	const npmBadge = badges.renderBadge('npmversion', { npmPackageName: '@eirikk/sveltekit-stuff' });
+	const githubBadge = badges.renderBadge('githubstar', { githubSlug: 'ampled/sveltekit-stuff' });
 
 	// onMount(() => {
 	// 	// @ts-expect-error
@@ -19,10 +23,14 @@
 
 <div class="container mx-auto min-h-full pt-4">
 	<Navigation />
-	<main>
+	<main class="min-h-full">
 		<slot />
 	</main>
+	<footer class="lg:fixed lg:bottom-0 lg:left-0 p-4 flex flex-col gap-1">
+		{@html npmBadge}
+		{@html githubBadge}
+	</footer>
 </div>
-<DevOnly>
+<!-- <DevOnly>
 	<Breakpoints />
-</DevOnly>
+</DevOnly> -->

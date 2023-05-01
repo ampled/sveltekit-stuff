@@ -19,8 +19,8 @@
 		<span class="bg-blue-300 text-xs rounded font-mono px-1 select-none" title="tailwind">tw</span>
 	{/if}
 	{#if kit}
-		<span class="bg-orange-400 text-xs rounded font-mono px-1 select-none" title="sveltekit only"
-			>kit</span
-		>
+		<span class="bg-orange-400 text-xs rounded font-mono px-1 select-none" title="sveltekit only">
+			kit
+		</span>
 	{/if}
 </div>
