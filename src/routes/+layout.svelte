@@ -3,7 +3,7 @@
 	import Breakpoints from '$lib/components/Breakpoints.svelte';
 	import DevOnly from '$lib/components/DevOnly.svelte';
 
-	import badges from 'badges';
+	import * as badges from 'badges';
 
 	const npmBadge = badges.renderBadge('npmversion', { npmPackageName: '@eirikk/sveltekit-stuff' });
 	const githubBadge = badges.renderBadge('githubstar', { githubSlug: 'ampled/sveltekit-stuff' });
