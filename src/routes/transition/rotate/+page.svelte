@@ -69,7 +69,12 @@
 				on:click={() => (show = !show)}
 				class="bg-lime-600 text-white rounded-lg p-3 hover:bg-lime-400">hide / show</button
 			>
-			<button class="border border-black rounded-lg p-4" on:click={reset}> reset params </button>
+			<button
+				class="border border-black rounded-lg p-4 dark:border-white hover:bg-lime-600"
+				on:click={reset}
+			>
+				reset params
+			</button>
 		</div>
 
 		<div
@@ -84,7 +89,10 @@
 			<div>
 				<label class="flex flex-col">
 					<b>easing</b>
-					<select bind:value={easingString} class="rounded">
+					<select
+						bind:value={easingString}
+						class="rounded text-black dark:text-white dark:bg-black"
+					>
 						{#each easingOptions as option}
 							<option value={option}>{option}</option>
 						{/each}
@@ -92,7 +100,7 @@
 				</label>
 				<label class="flex flex-col">
 					<b>transform origin</b>
-					<select bind:value={origin} class="rounded">
+					<select bind:value={origin} class="rounded text-black dark:text-white dark:bg-black">
 						{#each transformOrigins as option}
 							<option value={option}>{option}</option>
 						{/each}
@@ -102,13 +110,13 @@
 		</div>
 
 		<div
-			class="relative w-full basis-full h-32 flex flex-row items-center justify-center bg-slate-300"
+			class="relative w-full basis-full h-32 flex flex-row items-center justify-center bg-slate-300 mb-52"
 		>
 			<div class="h-36" />
 			{#key options}
 				{#if show}
 					<div
-						class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin} drop-shadow-2xl`}
+						class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin}`}
 						transition:rotate|local={options}
 					>
 						😵‍💫

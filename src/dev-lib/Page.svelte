@@ -6,7 +6,7 @@
 
 <!-- <div> -->
 <div
-	class="flex flex-col items-center justify-start min-h-[100%] h-full w-full gap-4 lg:pl-80"
+	class="flex flex-col items-center justify-start min-h-[100%] h-full w-full gap-4 lg:pl-80 mb-52"
 	in:ROUTE_TRANSITION={{ ...ROUTE_TRANSITION_PARAMS, delay: 300 }}
 	out:ROUTE_TRANSITION={ROUTE_TRANSITION_PARAMS}
 >

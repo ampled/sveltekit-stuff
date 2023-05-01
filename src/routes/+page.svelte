@@ -13,9 +13,9 @@
 <Page title="My SvelteKit Stuff">
 	<p class="max-w-3xl self-start">
 		Hi!<br /> This is the bare bones documentation for my npm package
-		<span class="bg-gray-300 font-mono"> @eirikk/sveltekit-stuff </span>.<br />
-		It mostly has things I tend to re-implement for every SvelteKit-project I work on. It also happens
-		to have things I use with tailwind.
+		<CodeSpan>@eirikk/sveltekit-stuff</CodeSpan>.<br />
+		It mostly has things I tend to re-implement for every SvelteKit-project I work on.<br />
+		It also happens to have things I use with tailwind.
 	</p>
 
 	<h2 class="self-start font-bold text-xl" id="getting-started">Getting Started</h2>

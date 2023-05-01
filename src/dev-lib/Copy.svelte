@@ -13,7 +13,7 @@
 
 <button
 	on:click={copyToClipBoard}
-	class="rounded border border-black font-mono text-sm w-14 text-center"
+	class="rounded border border-black font-mono text-sm w-14 text-center dark:border-slate-200"
 >
 	{buttonText}
 </button>

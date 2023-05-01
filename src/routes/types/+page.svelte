@@ -3,6 +3,7 @@
 	import Page from '$dlib/Page.svelte';
 	import types from '$lib/types/index.ts?raw';
 	import example from '$dlib/const.ts?raw';
+	import CodeSpan from '$dlib/CodeSpan.svelte';
 </script>
 
 <Page title="Types">
@@ -17,6 +18,6 @@
 	<Code code={example} svelte={false} />
 
 	<p>
-		The <span class="font-mono">Prettify</span>-type is just cool.
+		The <CodeSpan>Prettify</CodeSpan>-type is just cool.
 	</p>
 </Page>

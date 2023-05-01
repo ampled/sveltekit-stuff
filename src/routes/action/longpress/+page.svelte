@@ -23,7 +23,11 @@
 	<label class="flex flex-col">
 		<b>longpress time (ms)</b>
 		<input type="range" bind:value={time} max={5000} min={100} />
-		<input class="border border-black" type="number" bind:value={time} />
+		<input
+			class="border border-black bg-white text-black dark:bg-black dark:text-white"
+			type="number"
+			bind:value={time}
+		/>
 	</label>
 
 	<div

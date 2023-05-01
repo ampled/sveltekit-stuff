@@ -3,6 +3,7 @@
 	import code from './example.txt?raw';
 	import Page from '$dlib/Page.svelte';
 	import { merge } from '$lib/util';
+	import CodeSpan from '$dlib/CodeSpan.svelte';
 
 	let input = `
     [
@@ -31,8 +32,8 @@
 
 <Page title="merge">
 	<p>
-		<span class="bg-gray-400 font-mono p-1">tailwind-merge</span> combined with
-		<span class="bg-gray-400 font-mono p-1">clsx</span> for object support
+		<CodeSpan>tailwind-merge</CodeSpan> combined with
+		<CodeSpan>clsx</CodeSpan> for object support
 	</p>
 	<Code {code} svelte />
 

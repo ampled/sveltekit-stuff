@@ -18,5 +18,10 @@
 	{#if slider}
 		<input type="range" bind:value {...$$restProps} />
 	{/if}
-	<input class="border border-black rounded" type="number" bind:value {...$$restProps} />
+	<input
+		class="border border-black rounded text-black dark:bg-black dark:text-white dark:border-slate-100"
+		type="number"
+		bind:value
+		{...$$restProps}
+	/>
 </label>

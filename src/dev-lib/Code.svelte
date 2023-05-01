@@ -13,11 +13,11 @@
 </svelte:head>
 
 {#if svelte}
-	<HighlightSvelte {code} let:highlighted class="overflow-auto">
+	<HighlightSvelte {code} let:highlighted>
 		<LineNumbers {highlighted} wrapLines />
 	</HighlightSvelte>
 {:else}
-	<Highlight language={typescript} {code} let:highlighted class="overflow-auto">
+	<Highlight language={typescript} {code} let:highlighted>
 		<LineNumbers {highlighted} wrapLines />
 	</Highlight>
 {/if}

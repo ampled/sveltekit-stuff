@@ -65,7 +65,12 @@
 				on:click={() => (show = !show)}
 				class="bg-lime-600 text-white rounded-lg p-3 hover:bg-lime-400">hide / show</button
 			>
-			<button class="border border-black rounded-lg p-4" on:click={reset}> reset params </button>
+			<button
+				class="border border-black rounded-lg p-4 dark:border-white hover:bg-lime-400"
+				on:click={reset}
+			>
+				reset params
+			</button>
 		</div>
 
 		<div
@@ -79,7 +84,10 @@
 			<div>
 				<label class="flex flex-col">
 					<b>easing</b>
-					<select bind:value={easingString} class="rounded">
+					<select
+						bind:value={easingString}
+						class="rounded text-black dark:text-white dark:bg-black"
+					>
 						{#each easingOptions as option}
 							<option value={option}>{option}</option>
 						{/each}
@@ -87,7 +95,7 @@
 				</label>
 				<label class="flex flex-col">
 					<b>transform origin</b>
-					<select bind:value={origin} class="rounded">
+					<select bind:value={origin} class="rounded text-black dark:text-white dark:bg-black">
 						{#each transformOrigins as option}
 							<option value={option}>{option}</option>
 						{/each}

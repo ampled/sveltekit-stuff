@@ -66,9 +66,14 @@
 </script>
 
 <div
-	class="flex lg:max-w-xs lg:fixed p-2 lg:flex-col flex-row overflow-x-auto whitespace-nowrap items-center lg:items-start gap-4 justify-start rounded-lg bg-orange-900/50 lg:p-4 flex-shrink-0 w-full lg:w-auto shadow-lg hover:shadow-black/100 transition-all hover:drop-shadow"
+	class="flex lg:max-w-xs lg:fixed p-2 lg:flex-col flex-row overflow-x-auto whitespace-nowrap items-center lg:items-start gap-4 justify-start rounded-lg bg-white dark:bg-slate-800 dark:border-white border border-black lg:p-4 flex-shrink-0 w-full lg:w-auto mb-10 lg:mb-0"
 >
-	<a class="bg-orange-400 rounded font-bold w-full text-center px-4" href="/"> sveltekit stuff </a>
+	<a
+		class="bg-white dark:bg-slate-800 dark:border-white border border-black rounded font-bold w-full text-center px-4"
+		href="/"
+	>
+		sveltekit stuff
+	</a>
 	{#each Object.keys(navItems) as group}
 		<NavGroup title={group}>
 			{#each navItems[group] as item}

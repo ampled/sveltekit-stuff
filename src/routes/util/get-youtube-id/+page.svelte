@@ -4,6 +4,7 @@
 	import code from './example.txt?raw';
 	import Page from '$dlib/Page.svelte';
 	import TextInput from '$dlib/TextInput.svelte';
+	import CodeSpan from '$dlib/CodeSpan.svelte';
 
 	let youtubeUrl = 'https://www.youtube.com/watch?v=WIRK_pGdIdA';
 	$: youtubeId = getYoutubeId(youtubeUrl);
@@ -11,15 +12,14 @@
 
 <Page title="getYoutubeId">
 	<p>
-		Extract the Youtube ID from a YouYube URL. Returns <span class="font-mono bg-gray-300"
-			>false</span
-		> if invalid url.
+		Extract the Youtube ID from a YouYube URL. Returns
+		<CodeSpan>false</CodeSpan> if invalid url.
 	</p>
 	<Code {code} svelte />
 	<TextInput bind:value={youtubeUrl} title="YouTube URL" />
 
 	{#if youtubeId}
-		<div>youtube ID : <span class="bg-gray-400 font-mono">{youtubeId}</span></div>
+		<div>youtube ID : <CodeSpan>{youtubeId}</CodeSpan></div>
 		<iframe
 			width={1920 / 3}
 			height={1080 / 3}
