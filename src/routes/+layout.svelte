@@ -3,17 +3,7 @@
 	import Breakpoints from '$lib/components/Breakpoints.svelte';
 	import DevOnly from '$lib/components/DevOnly.svelte';
 
-	let npmBadge = '';
-	let githubBadge = '';
-
-	onMount(async () => {
-		const badges = await import('badges');
-		npmBadge = badges.renderBadge('npmversion', { npmPackageName: '@eirikk/sveltekit-stuff' });
-		githubBadge = badges.renderBadge('githubstar', { githubSlug: 'ampled/sveltekit-stuff' });
-	});
-
 	import './app.css';
-	import { onMount } from 'svelte';
 </script>
 
 <svelte:head>
@@ -26,8 +16,20 @@
 		<slot />
 	</main>
 	<footer class="lg:fixed lg:bottom-0 lg:left-0 p-4 flex flex-col gap-1">
-		{@html npmBadge}
-		{@html githubBadge}
+		<a href="https://npmjs.org/package/@eirikk/sveltekit-stuff" title="View this project on NPM"
+			><img src="https://img.shields.io/npm/v/@eirikk/sveltekit-stuff.svg" alt="NPM version" /></a
+		>
+		<span class="badge-githubstar"
+			><iframe
+				src="https://ghbtns.com/github-btn.html?user=ampled&amp;repo=sveltekit-stuff&amp;type=watch&amp;count=true"
+				allowtransparency={true}
+				title="Github Star"
+				scrolling="0"
+				width="110"
+				height="20"
+				frameborder="0"
+			/></span
+		>
 	</footer>
 </div>
 <DevOnly>
