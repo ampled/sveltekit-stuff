@@ -35,6 +35,10 @@
 			{
 				href: TRANSITION + 'rotate',
 				title: 'rotate'
+			},
+			{
+				href: TRANSITION + 'scale-xy',
+				title: 'scaleXY'
 			}
 		],
 		util: [

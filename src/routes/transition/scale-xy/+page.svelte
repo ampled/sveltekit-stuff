@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { rotate, type RotateParams } from '$lib/transition/rotate';
+	import { scaleXY, type ScaleXYParams } from '$lib/transition/scaleXY';
 	import * as easings from 'svelte/easing';
 	import code from './example.txt?raw';
 	import Code from '$dlib/Code.svelte';
@@ -13,38 +13,35 @@
 	let show = true;
 
 	let duration = 250;
-	let easingString: keyof typeof easings = 'backOut';
+	let easingString: keyof typeof easings = 'cubicOut';
 	$: easing = easings[easingString];
-	let rotation = 45;
-	let opacity = 0;
+	let opacity = 1;
 	let origin: (typeof transformOrigins)[number] = 'origin-center';
 	let x = 0;
-	let y = 0;
+	let y = 1;
 
 	$: options = {
 		duration,
 		easing,
-		rotation,
 		opacity,
 		x,
 		y
-	} as RotateParams;
-
-	export const snapshot: Snapshot = {
-		capture: () => ({ duration, easingString, rotation, opacity, origin, x, y }),
-		restore: (value) => ({ duration, easingString, rotation, opacity, origin, x, y } = value)
-	};
+	} as ScaleXYParams;
 
 	function reset() {
 		duration = 250;
-		easing = easings.backOut;
-		rotation = 45;
+		easing = easings.cubicOut;
 		opacity = 0;
 		x = 0;
 		y = 0;
 	}
 
-	const rotateOptions = `interface RotateParams {
+	export const snapshot: Snapshot = {
+		capture: () => ({ duration, easingString, opacity, origin, x, y }),
+		restore: (value) => ({ duration, easingString, opacity, origin, x, y } = value)
+	};
+
+	const rotateOptions = `interface ScaleXYParams {
   delay?: number;
   duration?: number;
   easing?: EasingFunction;
@@ -55,11 +52,10 @@
 }`;
 </script>
 
-<Page title="rotate">
-	<p>
-		Svelte transition that rotates items in and out.<br />
-		Setting transform-origin on the element gives more control.
-	</p>
+<div class="origin" />
+
+<Page title="scaleXY">
+	<p>Like svelte's scale transition, but takes individual x and y params.</p>
 	<Code {code} />
 	<Code code={rotateOptions} svelte={false} />
 
@@ -75,7 +71,6 @@
 		<div
 			class="flex flex-col md:flex-row gap-4 items-center md:items-start justify-center flex-wrap"
 		>
-			<NumberInput title="rotation (degrees)" bind:value={rotation} max={1080} min={-1080} />
 			<NumberInput title="duration (ms)" bind:value={duration} max={5000} min={10} />
 			<NumberInput title="opacity" bind:value={opacity} max={1} min={0} step={0.1} />
 			<NumberInput title="x" bind:value={x} slider={false} />
@@ -102,16 +97,16 @@
 		</div>
 
 		<div
-			class="relative w-full basis-full h-32 flex flex-row items-center justify-center bg-slate-300"
+			class="relative w-full basis-full h-32 flex flex-row items-center justify-center bg-slate-300 mb-12"
 		>
 			<div class="h-36" />
 			{#key options}
 				{#if show}
 					<div
-						class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin} drop-shadow-2xl`}
-						transition:rotate|local={options}
+						class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin}`}
+						transition:scaleXY|local={options}
 					>
-						😵‍💫
+						😯
 					</div>
 				{/if}
 			{/key}

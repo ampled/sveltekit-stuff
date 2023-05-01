@@ -17,3 +17,5 @@ export type SecondArgOf<T> = T extends (
 export type Prettify<T> = {
 	[K in keyof T]: T[K];
 } & {};
+
+export type Optional<T> = T | undefined;

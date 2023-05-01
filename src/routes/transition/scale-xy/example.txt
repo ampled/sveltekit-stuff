@@ -1,0 +1,7 @@
+<script>
+  import { scaleXY } from '@eirikk/sveltekit-stuff/transition/scaleXY';
+</script>
+
+<div
+  transition:scaleXY
+/>
