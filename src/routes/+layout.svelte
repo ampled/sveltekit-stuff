@@ -3,15 +3,14 @@
 	import Breakpoints from '$lib/components/Breakpoints.svelte';
 	import DevOnly from '$lib/components/DevOnly.svelte';
 
-	import * as badges from 'badges';
+	let npmBadge = '';
+	let githubBadge = '';
 
-	const npmBadge = badges.renderBadge('npmversion', { npmPackageName: '@eirikk/sveltekit-stuff' });
-	const githubBadge = badges.renderBadge('githubstar', { githubSlug: 'ampled/sveltekit-stuff' });
-
-	// onMount(() => {
-	// 	// @ts-expect-error
-	// 	// hljs.configure({ tabReplace: '  ' });
-	// });
+	onMount(async () => {
+		const badges = await import('badges');
+		npmBadge = badges.renderBadge('npmversion', { npmPackageName: '@eirikk/sveltekit-stuff' });
+		githubBadge = badges.renderBadge('githubstar', { githubSlug: 'ampled/sveltekit-stuff' });
+	});
 
 	import './app.css';
 	import { onMount } from 'svelte';
@@ -31,6 +30,6 @@
 		{@html githubBadge}
 	</footer>
 </div>
-<!-- <DevOnly>
+<DevOnly>
 	<Breakpoints />
-</DevOnly> -->
+</DevOnly>
