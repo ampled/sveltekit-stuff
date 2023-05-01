@@ -9,7 +9,10 @@
 	const UTIL = '/util/';
 	const TYPES = '/types/';
 
-	const navItems: Record<string, Array<{ title: string; href: string; tw?: boolean }>> = {
+	const navItems: Record<
+		string,
+		Array<{ title: string; href: string; tw?: boolean; kit?: boolean }>
+	> = {
 		action: [
 			{
 				href: ACTION + 'click-outside',
@@ -23,7 +26,8 @@
 		components: [
 			{
 				href: COMPONENTS + 'devonly',
-				title: 'DevOnly'
+				title: 'DevOnly',
+				kit: true
 			},
 			{
 				href: COMPONENTS + 'breakpoints',
@@ -68,10 +72,10 @@
 
 	{#each Object.keys(navItems) as group}
 		<NavGroup title={group}>
-			{#each navItems[group] as { href, title, tw }}
-				{@const active = href ? $page.url?.pathname === href : false}
+			{#each navItems[group] as item}
+				{@const active = item.href ? $page.url?.pathname === item.href : false}
 
-				<NavItem {href} {title} {tw} {active} />
+				<NavItem {...item} {active} />
 			{/each}
 		</NavGroup>
 	{/each}

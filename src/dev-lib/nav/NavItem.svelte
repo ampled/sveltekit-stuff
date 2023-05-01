@@ -3,6 +3,7 @@
 	export let title = '';
 	export let tw = false;
 	export let active = false;
+	export let kit = false;
 </script>
 
 <div class="flex flex-row items-center justify-between lg:w-full lg:mb-1 mr-1">
@@ -15,6 +16,11 @@
 		{title}
 	</a>
 	{#if tw}
-		<span class="bg-blue-300 text-xs rounded font-mono p-1" title="tailwind">tw</span>
+		<span class="bg-blue-300 text-xs rounded font-mono px-1 select-none" title="tailwind">tw</span>
+	{/if}
+	{#if kit}
+		<span class="bg-orange-400 text-xs rounded font-mono px-1 select-none" title="sveltekit only"
+			>kit</span
+		>
 	{/if}
 </div>
