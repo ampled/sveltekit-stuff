@@ -25,7 +25,27 @@
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js",
 			"svelte": "./dist/index.js"
+		},
+		"./action/*.js": {
+			"types": "./dist/action/*.d.ts",
+			"default": "./dist/action/*.js",
+			"svelte": "./dist/action/*.js"
+		},
+		"./util/*.js": {
+			"types": "./dist/util/*.d.ts",
+			"default": "./dist/util/*.js",
+			"svelte": "./dist/util/*.js"
+		},
+		"./transition/*.js": {
+			"types": "./dist/util/*.d.ts",
+			"default": "./dist/util/*.js",
+			"svelte": "./dist/util/*.js"
+		},
+		"./components/*.svelte": {
+			"types": "./dist/components/*.d.ts",
+			"svelte": "./dist/action/*.svelte"
 		}
 	},
 	"files": [
