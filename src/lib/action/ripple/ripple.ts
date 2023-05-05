@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-
+const backOut = 'cubic-bezier(0.175, 0.885, 0.320, 1.275)';
 /**
  * Options for customizing ripples
  */
@@ -10,7 +10,7 @@ const defaults = {
 	centered: false,
 	spreadingDuration: '.4s',
 	spreadingDelay: '0s',
-	spreadingTimingFunction: 'cubic-bezier(0.175, 0.885, 0.320, 1.275)',
+	spreadingTimingFunction: 'linear',
 	clearingDuration: '1s',
 	clearingDelay: '0s',
 	clearingTimingFunction: 'ease-in-out'
