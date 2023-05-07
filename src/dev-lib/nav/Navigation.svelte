@@ -86,14 +86,14 @@
 
 <div
 	class:h-full={menuOpen}
-	class="lg:max-w-fit border-b lg:border-b-0 border-slate-500 fixed w-screen lg:max-h-fit lg:h-auto lg:top-0 lg:left-0 lg:bottom-auto lg:right-auto flex bg-slate-50 dark:bg-slate-900 flex-col p-2 overflow-hidden whitespace-nowrap items-start justify-start lg:p-4 flex-shrink-0 lg:w-auto mb-10 lg:mb-0 z-40 divide-y divide-slate-500 lg:pr-20 lg:border-r lg:gap-0"
+	class="lg:max-w-max border-b lg:border-b-0 border-slate-500 fixed w-screen lg:max-h-fit lg:h-auto lg:top-0 lg:left-0 lg:bottom-auto lg:right-auto flex bg-slate-50 dark:bg-slate-900 flex-col p-2 overflow-hidden whitespace-nowrap items-start justify-start lg:p-4 flex-shrink-0 lg:w-full mb-10 lg:mb-0 z-40 divide-y divide-slate-500 lg:pr-16 lg:border-r lg:gap-0"
 >
 	<!-- menu header -->
 	<div class="flex flex-row max-w-xs w-full justify-between items-center gap-4">
-		<button on:click={toggleMenu} class="font-bold text-2xl lg:hidden flex">
+		<button on:click={toggleMenu} class="font-bold text-2xl lg:hidden flex select-none">
 			{#key menuOpen}
-				<div class="w-4 h-4 leading-4" in:blur>
-					{#if menuOpen}x{:else}&equiv;{/if}
+				<div class="w-4 h-4 leading-4 flex flex-row items-center justify-center" in:blur>
+					{#if menuOpen}&#x2715;{:else}&equiv;{/if}
 				</div>
 			{/key}
 		</button>

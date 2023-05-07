@@ -2,4 +2,4 @@
  import Breakpoints from '@eirikk/components/Breakpoints.svelte';
 </script>
 
-<Breakpoints class="fixed top-0 right-0" />
+<Breakpoints class="fixed top-0 right-0" xs />

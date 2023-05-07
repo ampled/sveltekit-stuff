@@ -6,6 +6,7 @@
 	import CodeSpan from '$dlib/CodeSpan.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { browser } from '$app/environment';
+	import DemoContainer from '$dlib/DemoContainer.svelte';
 
 	let invalid = false;
 	let timeoutId: number | undefined = undefined;
@@ -72,24 +73,31 @@
 
 	<Code {code} svelte />
 
-	<label for="input" class="font-bold">input:</label>
-	<textarea
-		id="input"
-		name="input"
-		class="rounded font-mono bg-black text-green-400 min-w-[320px] text-xs p-1 border-2 border-green-400 shadow-xl shadow-green-400"
-		rows="11"
-		cols="15"
-		bind:value={input}
-	/>
-
-	<b>output:</b>
-	{#key output}
-		<div class="font-mono bg-black text-green-400" in:fly={{ y: -10 }}>
-			{#if typeof output === 'string'}
-				'{output}'
-			{:else}
-				{output}
-			{/if}
+	<DemoContainer>
+		<div class="flex flex-col md:flex-row gap-8">
+			<div class="flex flex-col">
+				<label for="input" class="font-bold">input:</label>
+				<textarea
+					id="input"
+					name="input"
+					class="rounded font-mono bg-black text-green-400 min-w-[320px] text-xs p-1 border-2 border-green-400 shadow-xl shadow-green-400"
+					rows="11"
+					cols="15"
+					bind:value={input}
+				/>
+			</div>
+			<div class="flex flex-col">
+				<b>output:</b>
+				{#key output}
+					<div class="font-mono bg-black text-green-400" in:fly={{ y: -10 }}>
+						{#if typeof output === 'string'}
+							'{output}'
+						{:else}
+							{output}
+						{/if}
+					</div>
+				{/key}
+			</div>
 		</div>
-	{/key}
+	</DemoContainer>
 </Page>

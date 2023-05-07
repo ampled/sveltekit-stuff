@@ -5,6 +5,7 @@
 	import Page from '$dlib/Page.svelte';
 	import TextInput from '$dlib/TextInput.svelte';
 	import CodeSpan from '$dlib/CodeSpan.svelte';
+	import DemoContainer from '$dlib/DemoContainer.svelte';
 
 	let youtubeUrl = 'https://www.youtube.com/watch?v=WIRK_pGdIdA';
 	$: youtubeId = getYoutubeId(youtubeUrl);
@@ -16,20 +17,24 @@
 		<CodeSpan>false</CodeSpan> if invalid url.
 	</p>
 	<Code {code} svelte />
-	<TextInput bind:value={youtubeUrl} title="YouTube URL" />
 
-	{#if youtubeId}
-		<div>youtube ID : <CodeSpan>{youtubeId}</CodeSpan></div>
-		<iframe
-			width={1920 / 3}
-			height={1080 / 3}
-			src={`https://www.youtube.com/embed/${youtubeId}`}
-			title="youtube embed"
-			frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-			allowfullscreen
-		/>
-	{:else}
-		Invalid Youtube Url
-	{/if}
+	<DemoContainer>
+		<div class="flex flex-col gap-4">
+			<TextInput bind:value={youtubeUrl} title="YouTube URL" />
+			{#if youtubeId}
+				<div>YouTube ID = <CodeSpan>{youtubeId}</CodeSpan></div>
+				<iframe
+					width={1920 / 3}
+					height={1080 / 3}
+					src={`https://www.youtube.com/embed/${youtubeId}`}
+					title="youtube embed"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+				/>
+			{:else}
+				Invalid Youtube Url
+			{/if}
+		</div>
+	</DemoContainer>
 </Page>

@@ -9,7 +9,7 @@
 	<b>{title}</b>
 	<input
 		type="text"
-		class="border border-black rounded dark:text-white dark:bg-black dark:border-white"
+		class="border border-black rounded dark:text-white dark:bg-black dark:border-white px-2"
 		bind:value
 	/>
 </label>

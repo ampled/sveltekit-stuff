@@ -5,7 +5,7 @@
 		Demo
 	</h3>
 	<div
-		class="flex flex-row items-center justify-center basis-full w-full bg-slate-800/50 py-4 rounded-lg rounded-tl-none"
+		class="p-2 flex flex-col gap-4 md:flex-row items-center justify-center basis-full w-full bg-slate-800/50 py-4 rounded-lg rounded-tl-none border border-slate-500 dark:border-green-700"
 	>
 		<slot />
 	</div>

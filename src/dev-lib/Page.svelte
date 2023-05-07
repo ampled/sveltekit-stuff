@@ -7,7 +7,7 @@
 
 <!-- <div> -->
 <div
-	class="min-h-full flex flex-col px-3 pb-52 mb-4 w-full pt-12 lg:pt-4 gap-8 lg:pl-64 lg:pr-6 z-40 overflow-hidden"
+	class="min-h-full flex flex-col px-3 pb-52 mb-4 w-full pt-14 lg:pt-4 gap-8 lg:pl-64 lg:pr-6 z-40 overflow-hidden"
 >
 	{#if title}
 		<h2
