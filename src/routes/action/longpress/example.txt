@@ -1,1 +1,11 @@
-<div use:longpress={200} on:long={handleLongPress} />
+<script lang="ts">
+  import { longpress, type LongpressEvent } from '@eirikk/sveltekit-stuff';
+
+  function handleLongPress(e: LongpressEvent) {
+    // todo: implement a cool secret
+  }
+</script>
+
+<button use:longpress on:long={handleLongPress}>
+  hold here to reveal secrets
+</button>

@@ -8,7 +8,7 @@
 >
 	<div class="bg-green-400">xs</div>
 	<div class="bg-red-400 sm:bg-green-400">sm</div>
-	<div class="bg-red-400 lg:bg-green-400">md</div>
+	<div class="bg-red-400 md:bg-green-400">md</div>
 	<div class="bg-red-400 lg:bg-green-400">lg</div>
 	<div class="bg-red-400 xl:bg-green-400">xl</div>
 	<div class="bg-red-400 2xl:bg-green-400">2xl</div>

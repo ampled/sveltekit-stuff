@@ -1,3 +1,7 @@
+<!--
+	@component
+	work in progress
+-->
 <script lang="ts">
 	import { backOut, linear } from 'svelte/easing';
 	import { onMount } from 'svelte/types/runtime/internal/lifecycle';

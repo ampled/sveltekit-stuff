@@ -4,19 +4,41 @@
 	import Page from '$dlib/Page.svelte';
 	import { merge } from '$lib/util';
 	import CodeSpan from '$dlib/CodeSpan.svelte';
+	import { fade, fly } from 'svelte/transition';
+	import { browser } from '$app/environment';
 
-	let input = `
-    [
-      false,
-      null,
-      undefined,
-      'p-1',
-      'p-2',
-      true && ['m-1'],
-      { 'p-3': false }
-    ]`;
-	$: output = parseInput(input);
 	let invalid = false;
+	let timeoutId: number | undefined = undefined;
+
+	function setOutput(value: any) {
+		if (browser) {
+			if (timeoutId) {
+				window.clearTimeout(timeoutId);
+			}
+
+			timeoutId = window.setTimeout(() => {
+				output = value;
+			}, 500);
+		}
+	}
+
+	let input = `// edit this    
+	const condition = false;
+// try changing to true ^
+[
+  'p-2',
+  'p-1',
+  { 'p-3': condition },
+  false && ['m-1'],
+  false,
+  null,
+  undefined,
+]`;
+
+	let output: any = parseInput(input);
+	$: {
+		setOutput(parseInput(input));
+	}
 
 	function parseInput(input: string) {
 		try {
@@ -32,26 +54,42 @@
 
 <Page title="merge">
 	<p>
-		<CodeSpan>tailwind-merge</CodeSpan> combined with
-		<CodeSpan>clsx</CodeSpan> for object support
+		A re-export of <CodeSpan>tailwind-merge</CodeSpan> augmented with
+		<CodeSpan>clsx</CodeSpan> for conditional classes with object-syntax support.<br />
+		<a
+			class="underline"
+			href="https://github.com/dcastil/tailwind-merge/discussions/137#discussioncomment-3482513"
+			target="_blank"
+		>
+			See this github comment for details.
+		</a>
 	</p>
+
+	<p>
+		<CodeSpan>tailwind-merge</CodeSpan> exports <CodeSpan>twMerge</CodeSpan> that overrides conflicting
+		classes from right to left.<br />
+	</p>
+
 	<Code {code} svelte />
 
-	<label for="input">input</label>
+	<label for="input" class="font-bold">input:</label>
 	<textarea
 		id="input"
-		class="border border-black rounded font-mono bg-black text-green-400 min-w-[320px] text-xs"
-		rows="10"
-		cols="10"
+		name="input"
+		class="rounded font-mono bg-black text-green-400 min-w-[320px] text-xs p-1 border-2 border-green-400 shadow-xl shadow-green-400"
+		rows="11"
+		cols="15"
 		bind:value={input}
 	/>
 
 	<b>output:</b>
-	<div class="font-mono bg-black text-green-400">
-		{#if typeof output === 'string'}
-			'{output}'
-		{:else}
-			{output}
-		{/if}
-	</div>
+	{#key output}
+		<div class="font-mono bg-black text-green-400" in:fly={{ y: -10 }}>
+			{#if typeof output === 'string'}
+				'{output}'
+			{:else}
+				{output}
+			{/if}
+		</div>
+	{/key}
 </Page>

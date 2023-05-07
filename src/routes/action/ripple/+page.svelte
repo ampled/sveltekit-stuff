@@ -1,20 +1,38 @@
 <script lang="ts">
 	import Code from '$dlib/Code.svelte';
 	import example from './example.txt?raw';
-	import ripple from '$lib/action/ripple';
+	import { ripple } from '$lib/action';
 	import Page from '$dlib/Page.svelte';
 
-	let text = 'click here';
-
 	let time = 200;
+
+	let type = `type RippleOptions = {
+	color: string;
+	class: string;
+	opacity: number;
+	centered: boolean;
+	spreadingDuration: number;
+	spreadingDelay: number;
+	spreadingTimingFunction: string;
+	clearingDuration: number;
+	clearingDelay: number;
+	clearingTimingFunction: string;
+};`;
 </script>
 
 <Page title="Ripple">
+	<p>
+		A material like ripple-effect in a svelte-action. The ripple uses the text color of the element
+		unless specified in the options.
+	</p>
+
 	<Code code={example} />
 
+	<Code code={type} svelte={false} title="Options" />
+
 	<label class="flex flex-col">
-		<b>longpress time (ms)</b>
-		<input type="range" bind:value={time} max={5000} min={100} />
+		<b>spreadingDuration (ms)</b>
+		<input type="range" bind:value={time} max={2000} min={50} />
 		<input
 			class="border border-black bg-white text-black dark:bg-black dark:text-white"
 			type="number"
@@ -23,9 +41,21 @@
 	</label>
 
 	<div
-		use:ripple={{}}
-		class="flex flex-col w-64 h-64 bg-orange-950 text-pink-400 items-center justify-center whitespace-pre text-center rounded-lg shadow-lg select-none"
+		use:ripple={{ spreadingDuration: time }}
+		class="flex flex-col w-64 h-32 bg-orange-950 text-pink-400 items-center justify-center whitespace-pre text-center rounded-lg shadow-lg select-none"
 	>
-		{text}
+		click to test ripple effect!
 	</div>
+
+	<button
+		use:ripple={{ spreadingDuration: time }}
+		class="border-black bg-white text-black p-8 uppercase rounded-lg border-4 font-bold dark:bg-black dark:text-white"
+		>click this</button
+	>
+
+	<button
+		use:ripple={{ spreadingDuration: time }}
+		class="border-pink-800 bg-white text-pink-800 p-8 uppercase rounded-lg border-4 font-bold"
+		>click this</button
+	>
 </Page>

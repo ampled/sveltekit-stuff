@@ -8,7 +8,7 @@
 	export let kit = false;
 </script>
 
-<div class="flex flex-row items-center justify-between lg:w-full lg:mb-1 mr-1">
+<div class="flex flex-row items-center justify-between w-full max-w-sm mb-1 mr-1">
 	<a
 		use:ripple
 		class:bg-orange-400={active}

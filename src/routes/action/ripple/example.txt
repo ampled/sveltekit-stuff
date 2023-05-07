@@ -1,0 +1,5 @@
+<script>
+ import { ripple } from '@eirikk/sveltekit-stuff';
+</script>
+
+<button use:ripple />

@@ -13,15 +13,16 @@
 	let show = true;
 
 	let duration = 250;
+	let origin: (typeof transformOrigins)[number] = 'origin-center';
 	let easingString: keyof typeof easings = 'cubicOut';
 	$: easing = easings[easingString];
 	let opacity = 1;
-	let origin: (typeof transformOrigins)[number] = 'origin-center';
 	let x = 0;
 	let y = 1;
 
 	$: options = {
 		duration,
+		origin,
 		easing,
 		opacity,
 		x,
@@ -57,7 +58,14 @@
 <Page title="scaleXY">
 	<p>Like svelte's scale transition, but takes individual x and y params.</p>
 	<Code {code} />
-	<Code code={rotateOptions} svelte={false} />
+
+	<div class="min-h-[283.5px]">
+		{#if show}
+			<div transition:scaleXY|local={options}>
+				<Code code={rotateOptions} svelte={false} title="Options" />
+			</div>
+		{/if}
+	</div>
 
 	<div class="flex flex-col items-center justify-center relative gap-4">
 		<div class="flex gap-1">
@@ -76,7 +84,7 @@
 		<div
 			class="flex flex-col md:flex-row gap-4 items-center md:items-start justify-center flex-wrap"
 		>
-			<NumberInput title="duration (ms)" bind:value={duration} max={5000} min={10} />
+			<NumberInput title="duration (ms)" bind:value={duration} max={5000} min={10} step={10} />
 			<NumberInput title="opacity" bind:value={opacity} max={1} min={0} step={0.1} />
 			<NumberInput title="x" bind:value={x} slider={false} />
 			<NumberInput title="y" bind:value={y} slider={false} />

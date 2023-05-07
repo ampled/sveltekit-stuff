@@ -3,20 +3,31 @@ const backOut = 'cubic-bezier(0.175, 0.885, 0.320, 1.275)';
 /**
  * Options for customizing ripples
  */
-const defaults = {
+const defaults: RippleOptions = {
 	color: 'currentColor',
 	class: '',
 	opacity: 0.1,
 	centered: false,
-	spreadingDuration: '.4s',
-	spreadingDelay: '0s',
+	spreadingDuration: 400,
+	spreadingDelay: 0,
 	spreadingTimingFunction: 'linear',
-	clearingDuration: '1s',
-	clearingDelay: '0s',
+	clearingDuration: 1000,
+	clearingDelay: 0,
 	clearingTimingFunction: 'ease-in-out'
 };
 
-export type RippleOptions = typeof defaults;
+export type RippleOptions = {
+	color: string;
+	class: string;
+	opacity: number;
+	centered: boolean;
+	spreadingDuration: number;
+	spreadingDelay: number;
+	spreadingTimingFunction: string;
+	clearingDuration: number;
+	clearingDelay: number;
+	clearingTimingFunction: string;
+};
 
 function isEventTouchEvent(e: any): e is TouchEvent {
 	return e.touches ? !!e.touches[0] : false;
@@ -47,7 +58,7 @@ export function RippleStart(
 	rippleStyle.marginLeft = '-50px';
 	target?.appendChild(ripple);
 	rippleStyle.opacity = opts.opacity.toString();
-	rippleStyle.transition = `transform ${opts.spreadingDuration} ${opts.spreadingTimingFunction} ${opts.spreadingDelay},opacity ${opts.clearingDuration} ${opts.clearingTimingFunction} ${opts.clearingDelay}`;
+	rippleStyle.transition = `transform ${opts.spreadingDuration}ms ${opts.spreadingTimingFunction} ${opts.spreadingDelay}ms, opacity ${opts.clearingDuration}ms ${opts.clearingTimingFunction} ${opts.clearingDelay}ms`;
 	rippleStyle.transform = 'scale(0) translate(0,0)';
 	rippleStyle.background = opts.color;
 

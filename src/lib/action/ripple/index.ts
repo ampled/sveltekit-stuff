@@ -4,7 +4,7 @@ import './ripple.css';
 /**
  * @param node {Element}
  */
-export default (node: Element, _options: Partial<RippleOptions> = {}) => {
+export function ripple(node: Element, _options: Partial<RippleOptions> = {}) {
 	let options = _options;
 	let destroyed = false;
 	let ripple: ReturnType<typeof RippleStart>;
@@ -27,7 +27,7 @@ export default (node: Element, _options: Partial<RippleOptions> = {}) => {
 	};
 
 	function setup() {
-		node.classList.add('s-ripple-container');
+		node.classList.add('esks-ripple-container');
 		node.addEventListener('pointerdown', handleStart);
 		node.addEventListener('pointerup', handleStop);
 		node.addEventListener('pointerleave', handleStop);
@@ -56,4 +56,6 @@ export default (node: Element, _options: Partial<RippleOptions> = {}) => {
 		},
 		destroy
 	};
-};
+}
+
+export default ripple;

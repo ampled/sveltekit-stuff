@@ -61,25 +61,10 @@
 		Setting transform-origin on the element gives more control.
 	</p>
 	<Code {code} />
-	<Code code={rotateOptions} svelte={false} />
+	<Code code={rotateOptions} svelte={false} title="Options" />
 
 	<div class="flex flex-col items-center justify-center relative gap-4">
-		<div class="flex gap-1">
-			<button
-				on:click={() => (show = !show)}
-				class="bg-lime-600 text-white rounded-lg p-3 hover:bg-lime-400">hide / show</button
-			>
-			<button
-				class="border border-black rounded-lg p-4 dark:border-white hover:bg-lime-600"
-				on:click={reset}
-			>
-				reset params
-			</button>
-		</div>
-
-		<div
-			class="flex flex-col md:flex-row gap-4 items-center md:items-start justify-center flex-wrap"
-		>
+		<div class="flex flex-col md:flex-row gap-4 items-start md:items-start justify-start flex-wrap">
 			<NumberInput title="rotation (degrees)" bind:value={rotation} max={1080} min={-1080} />
 			<NumberInput title="duration (ms)" bind:value={duration} max={5000} min={10} />
 			<NumberInput title="opacity" bind:value={opacity} max={1} min={0} step={0.1} />
@@ -110,19 +95,32 @@
 		</div>
 
 		<div
-			class="relative w-full basis-full h-32 flex flex-row items-center justify-center bg-slate-300 mb-52"
+			class="relative w-full basis-full h-32 flex flex-row items-center justify-center gap-6 bg-black/50 py-4"
 		>
-			<div class="h-36" />
-			{#key options}
-				{#if show}
-					<div
-						class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin}`}
-						transition:rotate|local={options}
-					>
-						😵‍💫
-					</div>
-				{/if}
-			{/key}
+			<div class="flex gap-1">
+				<button
+					on:click={() => (show = !show)}
+					class="bg-lime-600 text-white rounded-lg p-3 hover:bg-lime-400">hide / show</button
+				>
+				<button
+					class="border border-black rounded-lg p-4 dark:border-white hover:bg-lime-600"
+					on:click={reset}
+				>
+					reset params
+				</button>
+			</div>
+			<div class="h-36 w-32">
+				{#key options}
+					{#if show}
+						<div
+							class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin}`}
+							transition:rotate|local={options}
+						>
+							😵‍💫
+						</div>
+					{/if}
+				{/key}
+			</div>
 		</div>
 	</div>
 </Page>

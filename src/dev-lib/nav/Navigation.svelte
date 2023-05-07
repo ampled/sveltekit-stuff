@@ -1,13 +1,28 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { blur } from 'svelte/transition';
 	import NavGroup from './NavGroup.svelte';
+	import NavGroupMobile from './NavGroupMobile.svelte';
 	import NavItem from './NavItem.svelte';
+	import NavItemMobile from './NavItemMobile.svelte';
+	import { merge } from '$lib';
+	import { afterNavigate } from '$app/navigation';
 
 	const ACTION = '/action/';
 	const TRANSITION = '/transition/';
 	const COMPONENTS = '/components/';
 	const UTIL = '/util/';
 	const TYPES = '/types/';
+
+	let menuOpen = false;
+
+	function toggleMenu() {
+		menuOpen = !menuOpen;
+	}
+
+	afterNavigate(() => {
+		menuOpen = false;
+	});
 
 	const navItems: Record<
 		string,
@@ -21,6 +36,10 @@
 			{
 				href: ACTION + 'longpress',
 				title: 'longpress'
+			},
+			{
+				href: ACTION + 'ripple',
+				title: 'ripple'
 			}
 		],
 		components: [
@@ -66,21 +85,38 @@
 </script>
 
 <div
-	class="flex lg:max-w-xs lg:fixed p-2 lg:flex-col flex-row overflow-x-auto whitespace-nowrap items-center lg:items-start gap-4 justify-start rounded-lg bg-white dark:bg-slate-800 dark:border-white border border-black lg:p-4 flex-shrink-0 w-full lg:w-auto mb-10 lg:mb-0"
+	class:h-full={menuOpen}
+	class="lg:max-w-fit border-b lg:border-b-0 border-slate-500 fixed w-screen lg:max-h-fit lg:h-auto lg:top-0 lg:left-0 lg:bottom-auto lg:right-auto flex bg-slate-50 dark:bg-slate-900 flex-col p-2 overflow-hidden whitespace-nowrap items-start justify-start lg:p-4 flex-shrink-0 lg:w-auto mb-10 lg:mb-0 z-40 divide-y divide-slate-500 lg:pr-20 lg:border-r lg:gap-0"
 >
-	<a
-		class="bg-white dark:bg-slate-800 dark:border-white border border-black rounded font-bold w-full text-center px-4"
-		href="/"
-	>
-		sveltekit stuff
-	</a>
-	{#each Object.keys(navItems) as group}
-		<NavGroup title={group}>
-			{#each navItems[group] as item}
-				{@const active = item.href ? $page.url?.pathname === item.href : false}
+	<!-- menu header -->
+	<div class="flex flex-row max-w-xs w-full justify-between items-center gap-4">
+		<button on:click={toggleMenu} class="font-bold text-2xl lg:hidden flex">
+			{#key menuOpen}
+				<div class="w-4 h-4 leading-4" in:blur>
+					{#if menuOpen}x{:else}&equiv;{/if}
+				</div>
+			{/key}
+		</button>
+		<a class="text-xl font-bold w-full lg:mx-0 mr-2" href="/">
+			<h1>sveltekit stuff</h1>
+		</a>
+	</div>
 
-				<NavItem {...item} {active} />
-			{/each}
-		</NavGroup>
-	{/each}
+	<!-- menu items -->
+	<div
+		class="lg:flex flex-col items-start justify-start lg:translate-x-0 transition-all bg-inherit w-full lg:opacity-100 lg:h-auto"
+		class:opacity-0={!menuOpen}
+		class:opacity-100={menuOpen}
+		class:h-0={!menuOpen}
+	>
+		{#each Object.keys(navItems) as group}
+			<NavGroupMobile title={group}>
+				{#each navItems[group] as item}
+					{@const active = item.href ? $page.url?.pathname === item.href : false}
+
+					<NavItemMobile {...item} {active} />
+				{/each}
+			</NavGroupMobile>
+		{/each}
+	</div>
 </div>

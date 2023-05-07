@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Code from '$dlib/Code.svelte';
 	import example from './example.txt?raw';
-	import { longpress } from '$lib/action/longpress';
+	import { longpress, type LongpressEvent } from '$lib/action/longpress';
 	import Page from '$dlib/Page.svelte';
 
 	let text = 'click and hold here';
 
-	function handleLongPress() {
+	function handleLongPress(e: LongpressEvent) {
 		text = 'nice you did it';
 
 		setTimeout(() => {
@@ -17,7 +17,7 @@
 	let time = 200;
 </script>
 
-<Page title="Long Press">
+<Page title="Longpress">
 	<Code code={example} />
 
 	<label class="flex flex-col">
