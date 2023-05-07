@@ -6,5 +6,5 @@ export const ROUTE_TRANSITION_PARAMS: SecondArgOf<typeof ROUTE_TRANSITION> = {
 	// Infers FlyParams
 	duration: 250,
 	opacity: 0,
-	y: -300
+	x: 300
 };

@@ -9,7 +9,7 @@
 <Page title="Types">
 	<p>The npm package exports these utility types:</p>
 
-	<Code code={types} svelte={false} />
+	<Code code={types} svelte={false} title="Types" />
 
 	<p>
 		The arg inferral types can be useful in svelte for example when storing transitions / actions

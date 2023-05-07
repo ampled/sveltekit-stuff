@@ -1,8 +1,8 @@
 <script>
-  import { clickOutside } from '@eirikk/sveltekit-stuff';
+  import { clickOutside, type ClickOutsideEvent } from '@eirikk/sveltekit-stuff';
 
-  function handleClickOut() {
-    console.log('you clicked outside of the div');
+  function handleClickOut(event: ClickOutsideEvent) {
+    console.log('you clicked outside of this div: ', event.detail);
   }
 </script>
 

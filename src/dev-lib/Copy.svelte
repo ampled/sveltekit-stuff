@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { ripple } from '$lib';
+
 	export let text = '';
 	export let buttonText = 'copy';
 
@@ -12,6 +14,7 @@
 </script>
 
 <button
+	use:ripple
 	on:click={copyToClipBoard}
 	class="rounded border border-black font-mono text-sm w-14 text-center dark:border-slate-200"
 >

@@ -1,6 +1,6 @@
 export function longpress(node: HTMLElement, time = 200) {
 	let timeoutPtr: number;
-	let _time = 200;
+	let _time = time;
 	function handleMouseDown(e: MouseEvent | TouchEvent) {
 		window.addEventListener('mousemove', handleMoveBeforeLong);
 		timeoutPtr = window.setTimeout(() => {
@@ -41,4 +41,13 @@ export function longpress(node: HTMLElement, time = 200) {
 			node.addEventListener('touchend', handleMouseUp);
 		}
 	};
+}
+
+export type LongpressEvent<T = any> = CustomEvent<T>;
+declare global {
+	namespace svelteHTML {
+		interface HTMLAttributes<T extends EventTarget> {
+			'on:long'?: (event: LongpressEvent<T>) => void;
+		}
+	}
 }

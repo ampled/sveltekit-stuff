@@ -23,13 +23,14 @@
 
 	import './app.css';
 	import { swapTheme } from '$dlib/theme';
+	import { ripple } from '$lib';
 </script>
 
 <svelte:head>
 	<title>My Sveltekit Stuff</title>
 </svelte:head>
 
-<div class="container mx-auto min-h-full pt-4">
+<div class="mx-auto min-h-full">
 	<Navigation />
 	<main class="min-h-full">
 		<slot />
@@ -37,6 +38,7 @@
 	<footer class="lg:fixed lg:bottom-0 lg:left-0 p-4 flex flex-col gap-1">
 		{#if theme}
 			<button
+				use:ripple
 				class="bg-white dark:bg-slate-800 text-black dark:text-white border border-black rounded dark:border-white text-xs w-10 text-center"
 				on:click={() => (theme = swapTheme())}
 			>
