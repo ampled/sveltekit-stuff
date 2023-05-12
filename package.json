@@ -27,6 +27,11 @@
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js",
 			"default": "./dist/index.js"
+		},
+		"./animation": {
+			"types": "./dist/transition.d.ts",
+			"svelte": "./dist/transition.js",
+			"default": "./dist/transition.js"
 		}
 	},
 	"files": [
