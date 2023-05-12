@@ -59,11 +59,13 @@
 	<Code {code} />
 
 	<div class="min-h-[283.5px]">
-		{#if show}
-			<div transition:scaleXY|local={options}>
-				<Code code={rotateOptions} svelte={false} title="Options" />
-			</div>
-		{/if}
+		{#key options}
+			{#if show}
+				<div transition:scaleXY|local={options}>
+					<Code code={rotateOptions} svelte={false} title="Options" />
+				</div>
+			{/if}
+		{/key}
 	</div>
 
 	<DemoContainer>

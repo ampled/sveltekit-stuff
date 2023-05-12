@@ -3,6 +3,13 @@
 	import Breakpoints from '$lib/components/Breakpoints.svelte';
 	import DevOnly from '$lib/components/DevOnly.svelte';
 	import { onMount } from 'svelte';
+	import hljs from 'highlight.js';
+	// @ts-ignore
+	import hljs_svelte from 'highlightjs-svelte';
+	import 'highlight.js/styles/a11y-dark.css';
+	import { storeHighlightJs } from '@skeletonlabs/skeleton';
+	hljs_svelte(hljs);
+	storeHighlightJs.set(hljs);
 
 	let theme: 'dark' | 'light' | undefined;
 

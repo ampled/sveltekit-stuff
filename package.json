@@ -25,7 +25,8 @@
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js"
+			"default": "./dist/index.js",
+			"svelte": "./dist/index.js"
 		}
 	},
 	"files": [
@@ -38,6 +39,7 @@
 		"svelte": "^3.54.0"
 	},
 	"devDependencies": {
+		"@skeletonlabs/skeleton": "^1.5.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/package": "^2.0.0",
 		"@types/lodash-es": "^4.17.7",
@@ -47,6 +49,8 @@
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.26.0",
+		"highlight.js": "^11.8.0",
+		"highlightjs-svelte": "^1.0.6",
 		"lodash-es": "^4.17.21",
 		"postcss": "^8.4.23",
 		"prettier": "^2.8.0",

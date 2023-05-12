@@ -10,7 +10,7 @@
 		}
 	],
 	"settings": {
-		"typescript.tsdk": "node_modules/typescript/lib",
+		"typescript.tsdk": "sveltekit-stuff/node_modules/typescript/lib",
 		"tailwindCSS.experimental.configFile": "../tailwind.config.js",
 		"explorer.sortOrder": "filesFirst",
 		"explorer.sortOrderLexicographicOptions": "default"
