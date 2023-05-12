@@ -7,7 +7,7 @@
 	},
 	"license": "MIT",
 	"private": false,
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"homepage": "https://sveltekit-stuff-chi.vercel.app",
 	"scripts": {
 		"dev": "vite dev",
@@ -28,7 +28,7 @@
 			"svelte": "./dist/index.js",
 			"default": "./dist/index.js"
 		},
-		"./animation": {
+		"./transition": {
 			"types": "./dist/transition.d.ts",
 			"svelte": "./dist/transition.js",
 			"default": "./dist/transition.js"
