@@ -7,7 +7,7 @@
 	},
 	"license": "MIT",
 	"private": false,
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"homepage": "https://sveltekit-stuff-chi.vercel.app",
 	"scripts": {
 		"dev": "vite dev",
@@ -28,14 +28,17 @@
 			"svelte": "./dist/index.js",
 			"default": "./dist/index.js"
 		},
-		"./transition": {
-			"types": "./dist/transition.d.ts",
-			"svelte": "./dist/transition.js",
-			"default": "./dist/transition.js"
-		}
+		"./action/*": "./dist/action/*",
+		"./transition/*": "./dist/transition/*",
+		"./util/*": "./dist/util/*",
+		"./components/*": "./lib/components/*",
+		"./types/*": "./lib/types/*"
 	},
 	"files": [
 		"dist",
+		"./dist/**/*.svelte",
+		"./dist/**/*.js",
+		"./dist/**/*.d.ts",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
