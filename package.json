@@ -75,6 +75,7 @@
 	"type": "module",
 	"dependencies": {
 		"clsx": "^1.2.1",
+		"esm-env": "^1.0.0",
 		"tailwind-merge": "^1.12.0"
 	}
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
+	import { DEV } from 'esm-env';
 </script>
 
-{#if dev}
+{#if DEV}
 	<slot />
 {/if}
