@@ -24,18 +24,12 @@
 	},
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
-			"svelte": "./dist/index.js",
-			"default": "./dist/index.js"
-		},
-		"./action/*": "./dist/action/*",
-		"./transition/*": "./dist/transition/*",
-		"./util/*": "./dist/util/*",
-		"./components/*": "./lib/components/*",
-		"./types/*": "./lib/types/*"
+			"default": "./src/lib/index.ts"
+		}
 	},
 	"files": [
 		"dist",
+		".src/lib",
 		"./dist/**/*.svelte",
 		"./dist/**/*.js",
 		"./dist/**/*.d.ts",
