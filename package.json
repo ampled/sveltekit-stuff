@@ -29,7 +29,7 @@
 	},
 	"files": [
 		"dist",
-		".src/lib",
+		"./src/lib",
 		"./dist/**/*.svelte",
 		"./dist/**/*.js",
 		"./dist/**/*.d.ts",
