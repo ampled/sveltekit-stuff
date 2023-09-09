@@ -24,6 +24,7 @@
 	},
 	"exports": {
 		".": {
+			"svelte": "./src/lib/index.ts",
 			"default": "./src/lib/index.ts"
 		}
 	},
