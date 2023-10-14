@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-const backOut = 'cubic-bezier(0.175, 0.885, 0.320, 1.275)';
+// const backOut = 'cubic-bezier(0.175, 0.885, 0.320, 1.275)';
 /* eslint-disable no-param-reassign */
 /**
  * Options for customizing ripples
@@ -16,6 +16,7 @@ export const DEFAULT_OPTIONS = {
     clearingDelay: 0,
     clearingTimingFunction: 'ease-in-out'
 };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isTouchEvent(e) {
     return e.touches ? !!e.touches[0] : false;
 }

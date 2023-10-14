@@ -3,7 +3,7 @@
 	work in progress
 -->
 <script>import { backOut, linear } from "svelte/easing";
-import { onMount } from "svelte/types/runtime/internal/lifecycle";
+import { onMount } from "svelte";
 let rippleInstances = [];
 let ele;
 const defaults = {

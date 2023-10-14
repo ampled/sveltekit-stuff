@@ -1,7 +1,6 @@
 <script>import { onMount } from "svelte";
 let rippleEle;
 export let opacity = 0.1;
-export let spreadDuration = 400;
 function handleStart() {
 }
 function handleEnd() {

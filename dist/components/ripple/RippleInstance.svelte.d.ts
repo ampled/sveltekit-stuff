@@ -2,7 +2,6 @@ import { SvelteComponentTyped } from "svelte";
 declare const __propDef: {
     props: {
         opacity?: number | undefined;
-        spreadDuration?: number | undefined;
     };
     events: {
         [evt: string]: CustomEvent<any>;
