@@ -61,7 +61,7 @@
 	<div class="min-h-[283.5px]">
 		{#key options}
 			{#if show}
-				<div transition:scaleXY|local={options}>
+				<div transition:scaleXY={options}>
 					<Code code={rotateOptions} svelte={false} title="Options" />
 				</div>
 			{/if}
@@ -122,7 +122,7 @@
 					{#if show}
 						<div
 							class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin}`}
-							transition:scaleXY|local={options}
+							transition:scaleXY={options}
 						>
 							😯
 						</div>
