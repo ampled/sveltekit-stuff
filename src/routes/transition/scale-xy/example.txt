@@ -1,5 +1,5 @@
 <script>
-  import { scaleXY } from '@eirikk/sveltekit-stuff/transition/scaleXY';
+  import { scaleXY } from '@eirikk/sveltekit-stuff';
 </script>
 
 <div

@@ -118,7 +118,7 @@
 						{#if show}
 							<div
 								class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin}`}
-								transition:rotate|local={options}
+								transition:rotate={options}
 							>
 								😵‍💫
 							</div>

@@ -1,10 +1,23 @@
 import { RippleStart, RippleStop, type RippleOptions } from './ripple';
-import './ripple.css';
+
+function createRippleContainer() {
+	const rippleContainer = document.createElement('span');
+	rippleContainer.style.position = 'absolute';
+	rippleContainer.style.overflow = 'hidden';
+	rippleContainer.style.top = '0';
+	rippleContainer.style.right = '0';
+	rippleContainer.style.bottom = '0';
+	rippleContainer.style.left = '0';
+	rippleContainer.style.borderRadius = 'inherit';
+	rippleContainer.ariaHidden = 'true';
+	rippleContainer.dataset.ripple = 'ripple';
+	return rippleContainer;
+}
 
 /**
  * @param node {Element}
  */
-export function ripple(node: Element, _options: Partial<RippleOptions> = {}) {
+export function ripple(node: HTMLElement, _options: Partial<RippleOptions> = {}) {
 	let options = _options;
 	let destroyed = false;
 	let ripple: ReturnType<typeof RippleStart>;
@@ -15,7 +28,7 @@ export function ripple(node: Element, _options: Partial<RippleOptions> = {}) {
 	const handleStop = () => RippleStop(ripple);
 	const handleKeyboardStart = (e: Event) => {
 		if (e instanceof KeyboardEvent) {
-			if (!keyboardActive && (e.keyCode === 13 || e.keyCode === 32)) {
+			if (!keyboardActive && (e.code === 'Enter' || e.code === 'Space')) {
 				ripple = RippleStart(e, { ...options, centered: true });
 				keyboardActive = true;
 			}
@@ -26,8 +39,11 @@ export function ripple(node: Element, _options: Partial<RippleOptions> = {}) {
 		handleStop();
 	};
 
+	const rippleContainer = createRippleContainer();
+	node.style.position = 'relative';
+	node.appendChild(rippleContainer);
+
 	function setup() {
-		node.classList.add('esks-ripple-container');
 		node.addEventListener('pointerdown', handleStart);
 		node.addEventListener('pointerup', handleStop);
 		node.addEventListener('pointerleave', handleStop);
@@ -37,7 +53,6 @@ export function ripple(node: Element, _options: Partial<RippleOptions> = {}) {
 	}
 
 	function destroy() {
-		node.classList.remove('s-ripple-container');
 		node.removeEventListener('pointerdown', handleStart);
 		node.removeEventListener('pointerup', handleStop);
 		node.removeEventListener('pointerleave', handleStop);
