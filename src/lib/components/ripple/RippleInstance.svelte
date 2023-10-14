@@ -4,7 +4,7 @@
 	let rippleEle: HTMLDivElement;
 
 	export let opacity = 0.1;
-	export let spreadDuration = 400;
+	// export let spreadDuration = 400;
 
 	function handleStart() {}
 

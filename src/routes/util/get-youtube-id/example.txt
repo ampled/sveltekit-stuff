@@ -1,5 +1,5 @@
 <script>
-  import getYoutubeId from '@eirikk/svelte-stuff/util/get-youtube-id';
+  import { getYoutubeId } from '@eirikk/sveltekit-stuff';
 
   // also supports shorts (https://www.youtube.com/shorts/M1cz-0G1P38)
   // or youtu.be (https://youtu.be/WIRK_pGdIdA)

@@ -4,7 +4,7 @@
 -->
 <script lang="ts">
 	import { backOut, linear } from 'svelte/easing';
-	import { onMount } from 'svelte/types/runtime/internal/lifecycle';
+	import { onMount } from 'svelte';
 	let rippleInstances: RippleInstanceOptions[] = [];
 	let ele: HTMLDivElement;
 

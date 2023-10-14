@@ -1,5 +1,5 @@
 <script>
-  import DevOnly from '@eirikk/sveltekit-stuff';
+  import { DevOnly } from '@eirikk/sveltekit-stuff';
 </script>
 
 <DevOnly>

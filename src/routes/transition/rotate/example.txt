@@ -1,5 +1,5 @@
 <script>
-  import { rotate } from '@eirikk/sveltekit-stuff/transition';
+  import { rotate } from '@eirikk/sveltekit-stuff';
 </script>
 
 <div transition:rotate />

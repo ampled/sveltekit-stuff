@@ -1,5 +1,5 @@
 <script>
-  import merge from '@eirikk/sveltekit-stuff';
+  import {merge} from '@eirikk/sveltekit-stuff';
 
   $: classes = merge(
     'p-2',
