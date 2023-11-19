@@ -1,49 +1,14 @@
 <script lang="ts">
-	import { scaleXY, type ScaleXYParams } from '$lib/transition/scaleXY';
+	import { scaleXY } from '$lib/transition/scaleXY';
 	import * as easings from 'svelte/easing';
 	import code from './example.txt?raw';
 	import Code from '$dlib/Code.svelte';
 	import Page from '$dlib/Page.svelte';
-	import NumberInput from '$dlib/NumberInput.svelte';
 	import { transformOrigins } from '../origins';
-	import type { Snapshot } from './$types';
 	import DemoContainer from '$dlib/DemoContainer.svelte';
+	import Params from '$dlib/Params.svelte';
 
-	const easingOptions = Object.keys(easings) as (keyof typeof easings)[];
-
-	let show = true;
-
-	let duration = 250;
-	let origin: (typeof transformOrigins)[number] = 'origin-center';
-	let easingString: keyof typeof easings = 'cubicOut';
-	$: easing = easings[easingString];
-	let opacity = 1;
-	let x = 0;
-	let y = 1;
-
-	$: options = {
-		duration,
-		origin,
-		easing,
-		opacity,
-		x,
-		y
-	} as ScaleXYParams;
-
-	function reset() {
-		duration = 250;
-		easing = easings.cubicOut;
-		opacity = 0;
-		x = 0;
-		y = 0;
-	}
-
-	export const snapshot: Snapshot = {
-		capture: () => ({ duration, easingString, opacity, origin, x, y }),
-		restore: (value) => ({ duration, easingString, opacity, origin, x, y } = value)
-	};
-
-	const rotateOptions = `interface ScaleXYParams {
+	const scaleOptions = `interface ScaleXYParams {
   delay?: number;
   duration?: number;
   easing?: EasingFunction;
@@ -52,6 +17,67 @@
   x?: number;
   y?: number;
 }`;
+
+	const paramOptions = {
+		scaleXYParams: {
+			in: {
+				duration: { step: 100, min: 0, max: 10000 },
+				easing: { choices: Object.keys(easings) },
+				rotation: { step: 10, min: 1, max: 1080 },
+				opacity: { step: 0.05, min: 0, max: 1 },
+				origin: { choices: transformOrigins, custom: true },
+				show: { custom: true }
+			},
+			out: {
+				expand: false,
+				duration: { step: 100, min: 0, max: 10000 },
+				easing: { choices: Object.keys(easings) },
+				rotation: { step: 10, min: 1, max: 1080 },
+				opacity: { step: 0.05, min: 0, max: 1 },
+				origin: { choices: transformOrigins, custom: true },
+				show: { custom: true }
+			}
+		},
+		demo: {
+			origin: { choices: transformOrigins },
+			width: { max: 450, min: 50, step: 10 },
+			height: { max: 450, min: 50, step: 10 }
+		}
+	};
+
+	let demoParams = {
+		show: true,
+		origin: 'origin-center',
+		width: 128,
+		height: 128,
+		'copy in to out': true
+	};
+	let scaleXYParams = {
+		in: {
+			duration: 300,
+			easing: 'cubicOut' as keyof typeof easings,
+			opacity: 1,
+			x: 0,
+			y: 1
+		},
+		out: {
+			duration: 250,
+			easing: 'cubicOut' as keyof typeof easings,
+			opacity: 1,
+			x: 0,
+			y: 1
+		}
+	};
+
+	$: easingIn = easings[scaleXYParams.in.easing];
+	$: easingOut = easings[scaleXYParams.in.easing];
+
+	function onParamsChange(e: any) {
+		if (demoParams['copy in to out']) {
+			const p: typeof scaleXYParams = e.detail;
+			p.out = p.in;
+		}
+	}
 </script>
 
 <Page title="scaleXY">
@@ -59,75 +85,51 @@
 	<Code {code} />
 
 	<div class="min-h-[283.5px]">
-		{#key options}
-			{#if show}
-				<div transition:scaleXY={options}>
-					<Code code={rotateOptions} svelte={false} title="Options" />
+		{#key demoParams}
+			{#if demoParams.show}
+				<div
+					in:scaleXY|local={{ ...scaleXYParams.in, easing: easingIn }}
+					out:scaleXY|local={{ ...scaleXYParams.out, easing: easingOut }}
+				>
+					<Code code={scaleOptions} svelte={false} title="Options" />
 				</div>
 			{/if}
 		{/key}
 	</div>
 
 	<DemoContainer>
-		<div class="flex flex-col items-center justify-center relative gap-4">
-			<div class="flex gap-1">
-				<button
-					on:click={() => (show = !show)}
-					class="bg-lime-600 text-white rounded-lg p-3 hover:bg-lime-400">hide / show</button
-				>
-				<button
-					class="border border-black rounded-lg p-4 dark:border-white hover:bg-lime-400 bg-white text-black dark:text-white dark:bg-black"
-					on:click={reset}
-				>
-					reset params
-				</button>
+		<div class="w-full flex flex-row items-center justify-start gap-20">
+			<div class="flex flex-col gap-4">
+				<Params title="Demo Options" bind:params={demoParams} options={paramOptions.demo} />
+				<Params
+					title="ScaleXYParams"
+					bind:params={scaleXYParams}
+					options={paramOptions.scaleXYParams}
+					on:change={onParamsChange}
+				/>
 			</div>
-
 			<div
-				class="flex flex-col md:flex-row gap-4 items-center md:items-start justify-center flex-wrap"
+				class="flex flex-col items-center justify-center relative gap-4 bg-slate-300 w-full p-14 h-full"
 			>
-				<NumberInput title="duration (ms)" bind:value={duration} max={5000} min={10} step={10} />
-				<NumberInput title="opacity" bind:value={opacity} max={1} min={0} step={0.1} />
-				<NumberInput title="x" bind:value={x} slider={false} />
-				<NumberInput title="y" bind:value={y} slider={false} />
-
-				<div>
-					<label class="flex flex-col">
-						<b>easing</b>
-						<select
-							bind:value={easingString}
-							class="rounded text-black dark:text-white dark:bg-black"
-						>
-							{#each easingOptions as option}
-								<option value={option}>{option}</option>
-							{/each}
-						</select>
-					</label>
-					<label class="flex flex-col">
-						<b>transform origin</b>
-						<select bind:value={origin} class="rounded text-black dark:text-white dark:bg-black">
-							{#each transformOrigins as option}
-								<option value={option}>{option}</option>
-							{/each}
-						</select>
-					</label>
+				<div
+					style="min-width: {demoParams.width}px;
+				min-height: {demoParams.height}px;"
+					class="relative w-full basis-full h-32 flex flex-row items-center justify-center bg-slate-300 mb-12 rounded-md"
+				>
+					{#key scaleXYParams}
+						{#if demoParams.show}
+							<div
+								style="width: {demoParams.width}px;
+								height: {demoParams.height}px;"
+								class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${demoParams.origin}`}
+								in:scaleXY|local={{ ...scaleXYParams.in, easing: easingIn }}
+								out:scaleXY|local={{ ...scaleXYParams.out, easing: easingOut }}
+							>
+								😯
+							</div>
+						{/if}
+					{/key}
 				</div>
-			</div>
-
-			<div
-				class="relative w-full basis-full h-32 flex flex-row items-center justify-center bg-slate-300 mb-12"
-			>
-				<div class="h-36" />
-				{#key options}
-					{#if show}
-						<div
-							class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin}`}
-							transition:scaleXY={options}
-						>
-							😯
-						</div>
-					{/if}
-				{/key}
 			</div>
 		</div>
 	</DemoContainer>

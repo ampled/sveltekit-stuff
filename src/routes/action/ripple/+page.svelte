@@ -36,12 +36,8 @@
 
 	<Code code={type} svelte={false} title="Options" />
 
-	<div class="flex gap-2">
-		<Params bind:params options={{ opacity: { min: 0, max: 1, step: 0.1 } }} />
-	</div>
-
 	<DemoContainer>
-		<label class="flex flex-col">
+		<!-- <label class="flex flex-col">
 			<b>spreadingDuration (ms)</b>
 			<input type="range" bind:value={time} max={2000} min={50} />
 			<input
@@ -49,7 +45,9 @@
 				type="number"
 				bind:value={time}
 			/>
-		</label>
+		</label> -->
+
+		<Params bind:params options={{ opacity: { min: 0, max: 1, step: 0.1 } }} />
 
 		<div
 			use:ripple={params}
