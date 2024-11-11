@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { ripple } from '$lib';
 
-	export let text = '';
-	export let buttonText = 'copy';
+	interface Props {
+		text?: string;
+		buttonText?: string;
+	}
+
+	let { text = '', buttonText = $bindable('copy') }: Props = $props();
 
 	async function copyToClipBoard() {
 		await navigator.clipboard.writeText(text);
@@ -15,7 +19,7 @@
 
 <button
 	use:ripple
-	on:click={copyToClipBoard}
+	onclick={copyToClipBoard}
 	class="rounded border border-black font-mono text-sm w-14 text-center dark:border-slate-200"
 >
 	{buttonText}

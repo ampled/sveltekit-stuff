@@ -1,8 +1,15 @@
-<script>
+<script lang="ts">
 	import { blur } from 'svelte/transition';
 	import { ROUTE_TRANSITION, ROUTE_TRANSITION_PARAMS } from './const';
 
-	export let title = '';
+	interface Props {
+		title?: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let { title = '', children }: Props = $props();
+
+	const children_render = $derived(children);
 </script>
 
 <!-- <div> -->
@@ -23,7 +30,7 @@
 		out:ROUTE_TRANSITION={{ ...ROUTE_TRANSITION_PARAMS, x: -300 }}
 		class="flex flex-col items-start justify-start gap-8"
 	>
-		<slot />
+		{@render children_render?.()}
 	</div>
 </div>
 <!-- </div> -->

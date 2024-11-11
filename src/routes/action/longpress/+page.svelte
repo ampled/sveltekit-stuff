@@ -5,7 +5,7 @@
 	import Page from '$dlib/Page.svelte';
 	import DemoContainer from '$dlib/DemoContainer.svelte';
 
-	let text = 'click and hold here';
+	let text = $state('click and hold here');
 
 	function handleLongPress(e: LongpressEvent) {
 		text = 'nice you did it';
@@ -15,7 +15,7 @@
 		}, 2000);
 	}
 
-	let time = 200;
+	let time = $state(200);
 </script>
 
 <Page title="Longpress">
@@ -33,7 +33,7 @@
 
 		<div
 			use:longpress={time}
-			on:long={handleLongPress}
+			onlong={handleLongPress}
 			class="flex flex-col w-64 h-64 bg-orange-950 text-pink-400 items-center justify-center whitespace-pre text-center rounded-lg shadow-lg select-none"
 		>
 			{text}

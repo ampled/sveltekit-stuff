@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import Code from '$dlib/Code.svelte';
 	import code from './example.txt?raw';
 	import Page from '$dlib/Page.svelte';
@@ -23,7 +25,7 @@
 		}
 	}
 
-	let input = `// edit this    
+	let input = $state(`// edit this    
 	const condition = false;
 // try changing to true ^
 [
@@ -34,12 +36,9 @@
   false,
   null,
   undefined,
-]`;
+]`);
 
-	let output: any = parseInput(input);
-	$: {
-		setOutput(parseInput(input));
-	}
+	let output: any = $state(parseInput(input));
 
 	function parseInput(input: string) {
 		try {
@@ -51,6 +50,9 @@
 			invalid = false;
 		}
 	}
+	run(() => {
+		setOutput(parseInput(input));
+	});
 </script>
 
 <Page title="merge">
@@ -84,7 +86,7 @@
 					rows="11"
 					cols="15"
 					bind:value={input}
-				/>
+				></textarea>
 			</div>
 			<div class="flex flex-col">
 				<b>output:</b>

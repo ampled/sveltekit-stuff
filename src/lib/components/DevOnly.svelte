@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	let _varName = 'DEV';
 	let _value: any = true;
 	export function configure(varName: string = 'DEV', value: any = true) {
@@ -9,11 +9,16 @@
 
 <script lang="ts">
 	import * as env from 'esm-env';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	// @ts-expect-error
 	const show = env[_varName] === _value;
 </script>
 
 {#if show}
-	<slot />
+	{@render children?.()}
 {/if}

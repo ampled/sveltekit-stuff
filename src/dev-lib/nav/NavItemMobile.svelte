@@ -1,11 +1,21 @@
-<script>
+<script lang="ts">
 	import { ripple } from '$lib';
 
-	export let href = '';
-	export let title = '';
-	export let tw = false;
-	export let active = false;
-	export let kit = false;
+	interface Props {
+		href?: string;
+		title?: string;
+		tw?: boolean;
+		active?: boolean;
+		kit?: boolean;
+	}
+
+	let {
+		href = '',
+		title = '',
+		tw = false,
+		active = false,
+		kit = false
+	}: Props = $props();
 </script>
 
 <div class="flex flex-row items-center justify-between w-full max-w-md mb-1 mr-1 gap-3">

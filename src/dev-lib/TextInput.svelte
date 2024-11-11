@@ -1,8 +1,12 @@
-<script>
-	export let title = '';
-	export let value = '';
-	let className = '';
-	export { className as class };
+<script lang="ts">
+	interface Props {
+		title?: string;
+		value?: string;
+		class?: string;
+	}
+
+	let { title = '', value = $bindable(''), class: className = '' }: Props = $props();
+	
 </script>
 
 <label class={`flex flex-col min-w-[320px] w-[600px] ${className}`}>

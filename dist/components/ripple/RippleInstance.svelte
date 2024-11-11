@@ -1,23 +1,26 @@
-<script>import { onMount } from "svelte";
-let rippleEle;
-export let opacity = 0.1;
-function handleStart() {
-}
-function handleEnd() {
-}
-onMount(() => {
-  if (rippleEle) {
-    const parent = rippleEle.parentElement;
-    if (parent) {
-      parent.classList.add("esks-ripple-container");
-      parent.addEventListener("pointerdown", handleStart);
-      parent.addEventListener("pointerup", handleEnd);
-    }
-  }
-});
+<script lang="ts">
+	import { onMount } from 'svelte';
+	let rippleEle = $state<HTMLElement>();
+	interface Props {
+		opacity?: number;
+	}
+
+	let { opacity = 0.1 }: Props = $props();
+	function handleStart() {}
+	function handleEnd() {}
+	onMount(() => {
+		if (rippleEle) {
+			const parent = rippleEle.parentElement;
+			if (parent) {
+				parent.classList.add('esks-ripple-container');
+				parent.addEventListener('pointerdown', handleStart);
+				parent.addEventListener('pointerup', handleEnd);
+			}
+		}
+	});
 </script>
 
-<div bind:this={rippleEle} class="esks-ripple" style:--ripple-opacity={opacity} />
+<div bind:this={rippleEle} class="esks-ripple" style:--ripple-opacity={opacity}></div>
 
 <style>
 	.esks-ripple {

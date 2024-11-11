@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { rotate, type RotateParams } from '$lib/transition/rotate';
 	import * as easings from 'svelte/easing';
 	import code from './example.txt?raw';
@@ -11,25 +13,28 @@
 
 	const easingOptions = Object.keys(easings) as (keyof typeof easings)[];
 
-	let show = true;
+	let show = $state(true);
 
-	let duration = 250;
-	let easingString: keyof typeof easings = 'backOut';
-	$: easing = easings[easingString];
-	let rotation = 45;
-	let opacity = 0;
-	let origin: (typeof transformOrigins)[number] = 'origin-center';
-	let x = 0;
-	let y = 0;
+	let duration = $state(250);
+	let easingString: keyof typeof easings = $state('backOut');
+	let easing;
+	run(() => {
+		easing = easings[easingString];
+	});
+	let rotation = $state(45);
+	let opacity = $state(0);
+	let origin: (typeof transformOrigins)[number] = $state('origin-center');
+	let x = $state(0);
+	let y = $state(0);
 
-	$: options = {
+	let options = $derived({
 		duration,
 		easing,
 		rotation,
 		opacity,
 		x,
 		y
-	} as RotateParams;
+	} as RotateParams);
 
 	export const snapshot: Snapshot = {
 		capture: () => ({ duration, easingString, rotation, opacity, origin, x, y }),
@@ -103,12 +108,12 @@
 			>
 				<div class="flex gap-1">
 					<button
-						on:click={() => (show = !show)}
+						onclick={() => (show = !show)}
 						class="bg-lime-600 text-white rounded-lg p-3 hover:bg-lime-400">hide / show</button
 					>
 					<button
 						class="border border-black rounded-lg p-4 dark:border-white hover:bg-lime-600"
-						on:click={reset}
+						onclick={reset}
 					>
 						reset params
 					</button>

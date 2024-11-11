@@ -6,7 +6,7 @@
 	import { backOut, linear } from 'svelte/easing';
 	import { onMount } from 'svelte';
 	let rippleInstances: RippleInstanceOptions[] = [];
-	let ele: HTMLDivElement;
+	let ele: HTMLDivElement = $state();
 
 	const defaults: RippleInstanceOptions = {
 		easing: backOut,
@@ -29,9 +29,13 @@
 		clearEasing: any;
 	};
 
-	export let options: Partial<RippleInstanceOptions> = defaults;
+	interface Props {
+		options?: Partial<RippleInstanceOptions>;
+	}
 
-	$: rippleOptions = { ...defaults, ...options };
+	let { options = defaults }: Props = $props();
+
+	let rippleOptions = $derived({ ...defaults, ...options });
 
 	function createRipple(id: string) {
 		return {
@@ -59,7 +63,7 @@
 	});
 </script>
 
-<div bind:this={ele} class="esks-ripples" />
+<div bind:this={ele} class="esks-ripples"></div>
 
 <style>
 	:global(.esks-ripple-container) {

@@ -9,7 +9,7 @@
 
 	const path = `'./node_modules/@eirikk/sveltekit-stuff/**/*.{html,js,svelte,ts}'`;
 
-	let xs = false;
+	let xs = $state(false);
 </script>
 
 <Page title="Breakpoints">

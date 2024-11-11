@@ -14,7 +14,7 @@
 	const UTIL = '/util/';
 	const TYPES = '/types/';
 
-	let menuOpen = false;
+	let menuOpen = $state(false);
 
 	function toggleMenu() {
 		menuOpen = !menuOpen;
@@ -90,7 +90,7 @@
 >
 	<!-- menu header -->
 	<div class="flex flex-row max-w-xs w-full justify-between items-center gap-4">
-		<button on:click={toggleMenu} class="font-bold text-2xl lg:hidden flex select-none">
+		<button onclick={toggleMenu} class="font-bold text-2xl lg:hidden flex select-none">
 			{#key menuOpen}
 				<div class="w-4 h-4 leading-4 flex flex-row items-center justify-center" in:blur>
 					{#if menuOpen}&#x2715;{:else}&equiv;{/if}

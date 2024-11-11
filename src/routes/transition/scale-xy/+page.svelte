@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { scaleXY, type ScaleXYParams } from '$lib/transition/scaleXY';
 	import * as easings from 'svelte/easing';
 	import code from './example.txt?raw';
@@ -11,24 +13,27 @@
 
 	const easingOptions = Object.keys(easings) as (keyof typeof easings)[];
 
-	let show = true;
+	let show = $state(true);
 
-	let duration = 250;
-	let origin: (typeof transformOrigins)[number] = 'origin-center';
-	let easingString: keyof typeof easings = 'cubicOut';
-	$: easing = easings[easingString];
-	let opacity = 1;
-	let x = 0;
-	let y = 1;
+	let duration = $state(250);
+	let origin: (typeof transformOrigins)[number] = $state('origin-center');
+	let easingString: keyof typeof easings = $state('cubicOut');
+	let easing;
+	run(() => {
+		easing = easings[easingString];
+	});
+	let opacity = $state(1);
+	let x = $state(0);
+	let y = $state(1);
 
-	$: options = {
+	let options = $derived({
 		duration,
 		origin,
 		easing,
 		opacity,
 		x,
 		y
-	} as ScaleXYParams;
+	} as ScaleXYParams);
 
 	function reset() {
 		duration = 250;
@@ -72,12 +77,12 @@
 		<div class="flex flex-col items-center justify-center relative gap-4">
 			<div class="flex gap-1">
 				<button
-					on:click={() => (show = !show)}
+					onclick={() => (show = !show)}
 					class="bg-lime-600 text-white rounded-lg p-3 hover:bg-lime-400">hide / show</button
 				>
 				<button
 					class="border border-black rounded-lg p-4 dark:border-white hover:bg-lime-400 bg-white text-black dark:text-white dark:bg-black"
-					on:click={reset}
+					onclick={reset}
 				>
 					reset params
 				</button>
@@ -117,7 +122,7 @@
 			<div
 				class="relative w-full basis-full h-32 flex flex-row items-center justify-center bg-slate-300 mb-12"
 			>
-				<div class="h-36" />
+				<div class="h-36"></div>
 				{#key options}
 					{#if show}
 						<div

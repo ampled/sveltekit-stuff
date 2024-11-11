@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let rippleEle: HTMLDivElement;
+	let rippleEle: HTMLDivElement = $state();
 
-	export let opacity = 0.1;
+	interface Props {
+		opacity?: number;
+	}
+
+	let { opacity = 0.1 }: Props = $props();
 	// export let spreadDuration = 400;
 
 	function handleStart() {}
@@ -22,7 +26,7 @@
 	});
 </script>
 
-<div bind:this={rippleEle} class="esks-ripple" style:--ripple-opacity={opacity} />
+<div bind:this={rippleEle} class="esks-ripple" style:--ripple-opacity={opacity}></div>
 
 <style>
 	.esks-ripple {

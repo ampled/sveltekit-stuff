@@ -8,20 +8,25 @@
 		slider?: boolean;
 	} & HTMLInputAttributes;
 
-	export let title: Optional<string> = '';
-	export let value: Optional<number> = undefined;
-	export let slider: Optional<boolean> = true;
+	interface Props {
+		title?: Optional<string>;
+		value?: Optional<number>;
+		slider?: Optional<boolean>;
+		[key: string]: any
+	}
+
+	let { title = '', value = $bindable(undefined), slider = true, ...rest }: Props = $props();
 </script>
 
 <label class="flex flex-col">
 	<b>{title}</b>
 	{#if slider}
-		<input type="range" bind:value {...$$restProps} />
+		<input type="range" bind:value {...rest} />
 	{/if}
 	<input
 		class="border border-black rounded text-black dark:bg-black dark:text-white dark:border-slate-100"
 		type="number"
 		bind:value
-		{...$$restProps}
+		{...rest}
 	/>
 </label>

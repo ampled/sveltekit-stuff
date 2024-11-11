@@ -7,9 +7,9 @@
 	import DemoContainer from '$dlib/DemoContainer.svelte';
 	import Params from '$dlib/Params.svelte';
 
-	let time = 200;
+	let time = $state(200);
 
-	let params = { ...DEFAULT_OPTIONS };
+	let params = $state({ ...DEFAULT_OPTIONS });
 
 	let type = `type RippleOptions = {
 	color: string;

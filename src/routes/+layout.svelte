@@ -11,7 +11,7 @@
 	hljs_svelte(hljs);
 	storeHighlightJs.set(hljs);
 
-	let theme: 'dark' | 'light' | undefined;
+	let theme: 'dark' | 'light' | undefined = $state();
 
 	onMount(() => {
 		theme = localStorage.theme;
@@ -31,6 +31,13 @@
 	import './app.css';
 	import { swapTheme } from '$dlib/theme';
 	import { ripple } from '$lib';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
+
+	const children_render = $derived(children);
 </script>
 
 <svelte:head>
@@ -40,14 +47,14 @@
 <div class="mx-auto min-h-full">
 	<Navigation />
 	<main class="min-h-full">
-		<slot />
+		{@render children_render?.()}
 	</main>
 	<footer class="lg:fixed lg:bottom-0 lg:left-0 p-4 flex flex-col gap-1">
 		{#if theme}
 			<button
 				use:ripple
 				class="bg-white dark:bg-slate-800 text-black dark:text-white border border-black rounded dark:border-white text-xs w-10 text-center"
-				on:click={() => (theme = swapTheme())}
+				onclick={() => (theme = swapTheme())}
 			>
 				{theme}
 			</button>
@@ -64,7 +71,7 @@
 				width="110"
 				height="20"
 				frameborder="0"
-			/></span
+			></iframe></span
 		>
 	</footer>
 </div>

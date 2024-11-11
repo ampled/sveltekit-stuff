@@ -5,7 +5,7 @@
 	import Page from '$dlib/Page.svelte';
 	import DemoContainer from '$dlib/DemoContainer.svelte';
 
-	let text = 'hey click outside me';
+	let text = $state('hey click outside me');
 
 	function handleClickOut(event: ClickOutsideEvent) {
 		console.log(event);
@@ -24,7 +24,7 @@
 	<DemoContainer>
 		<div
 			use:clickOutside
-			on:clickOut={handleClickOut}
+			onclickOut={handleClickOut}
 			class=" flex flex-col w-64 h-64 bg-orange-950 text-pink-400 items-center justify-center whitespace-pre text-center rounded-lg shadow-lg"
 		>
 			{text}

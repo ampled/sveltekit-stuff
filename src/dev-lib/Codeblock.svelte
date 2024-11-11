@@ -4,9 +4,7 @@
 	// import html from 'svelte-highlight/languages/ht';
 	import style from 'svelte-highlight/styles/classic-dark';
 
-	export let code: string = '';
-	export let title: string = 'Example';
-	export let svelte = true;
+	let { code = '', title = 'Example', svelte = true } = $props();
 </script>
 
 <svelte:head>

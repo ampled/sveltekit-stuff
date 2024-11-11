@@ -5,10 +5,14 @@
 	// import style from 'svelte-highlight/styles/classic-dark';
 	import { CodeBlock } from '@skeletonlabs/skeleton';
 
-	export let code: string = '';
-	export let title: string = 'Example';
-	export let svelte = true;
-	// export let lineNumbers: boolean = svelte;
+	interface Props {
+		code?: string;
+		title?: string;
+		svelte?: boolean; // export let lineNumbers: boolean = svelte;
+	}
+
+	let { code = '', title = 'Example', svelte = true }: Props = $props();
+	
 </script>
 
 <!-- <svelte:head>

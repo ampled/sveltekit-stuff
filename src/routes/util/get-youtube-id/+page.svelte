@@ -7,8 +7,8 @@
 	import CodeSpan from '$dlib/CodeSpan.svelte';
 	import DemoContainer from '$dlib/DemoContainer.svelte';
 
-	let youtubeUrl = 'https://www.youtube.com/watch?v=WIRK_pGdIdA';
-	$: youtubeId = getYoutubeId(youtubeUrl);
+	let youtubeUrl = $state('https://www.youtube.com/watch?v=WIRK_pGdIdA');
+	let youtubeId = $derived(getYoutubeId(youtubeUrl));
 </script>
 
 <Page title="getYoutubeId">
@@ -31,7 +31,7 @@
 					frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 					allowfullscreen
-				/>
+				></iframe>
 			{:else}
 				Invalid Youtube Url
 			{/if}

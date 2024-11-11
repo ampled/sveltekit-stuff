@@ -1,8 +1,12 @@
-<script>
-	let className = '';
-	export { className as class };
-	export let xs = false;
+<script lang="ts">
+	
 	import merge from '../util/merge';
+	interface Props {
+		class?: string;
+		xs?: boolean;
+	}
+
+	let { class: className = '', xs = false }: Props = $props();
 </script>
 
 <div

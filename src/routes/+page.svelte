@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Code from '$dlib/Code.svelte';
 	import CodeSpan from '$dlib/CodeSpan.svelte';
 	import { ROUTE_TRANSITION } from '$dlib/const';
 	import Copy from '$dlib/Copy.svelte';
