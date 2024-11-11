@@ -6,4 +6,4 @@
   }
 </script>
 
-<div use:clickOutside on:clickOut={handleClickOut} />
+<div use:clickOutside onclickOut={handleClickOut} />

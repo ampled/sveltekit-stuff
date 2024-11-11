@@ -4,6 +4,7 @@
 	import example from './example.txt?raw';
 	import Page from '$dlib/Page.svelte';
 	import DemoContainer from '$dlib/DemoContainer.svelte';
+	import { fly } from 'svelte/transition';
 
 	let text = $state('hey click outside me');
 
@@ -25,9 +26,13 @@
 		<div
 			use:clickOutside
 			onclickOut={handleClickOut}
-			class=" flex flex-col w-64 h-64 bg-orange-950 text-pink-400 items-center justify-center whitespace-pre text-center rounded-lg shadow-lg"
+			class="flex flex-col w-64 h-64 bg-orange-950 text-pink-400 items-center justify-center whitespace-pre text-center rounded-lg shadow-lg"
 		>
-			{text}
+			{#key text}
+				<span in:fly={{ y: -20 }}>
+					{text}
+				</span>
+			{/key}
 		</div>
 	</DemoContainer>
 </Page>

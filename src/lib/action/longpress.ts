@@ -23,10 +23,10 @@ export const longpress: Action<HTMLElement, number, { onlong: () => void }> = (
 		window.clearTimeout(timeoutPtr);
 		window.removeEventListener('mousemove', handleMoveBeforeLong);
 	}
-	node.addEventListener('mousedown', handleMouseDown);
-	node.addEventListener('mouseup', handleMouseUp);
-	node.addEventListener('touchstart', handleMouseDown);
-	node.addEventListener('touchend', handleMouseUp);
+	node.addEventListener('mousedown', handleMouseDown, { passive: true });
+	node.addEventListener('mouseup', handleMouseUp, { passive: true });
+	node.addEventListener('touchstart', handleMouseDown, { passive: true });
+	node.addEventListener('touchend', handleMouseUp), { passive: true };
 	return {
 		destroy: () => {
 			node.removeEventListener('mousedown', handleMouseDown);
@@ -40,10 +40,10 @@ export const longpress: Action<HTMLElement, number, { onlong: () => void }> = (
 			node.removeEventListener('mouseup', handleMouseUp);
 			node.removeEventListener('touchstart', handleMouseDown);
 			node.removeEventListener('touchend', handleMouseUp);
-			node.addEventListener('mousedown', handleMouseDown);
-			node.addEventListener('mouseup', handleMouseUp);
-			node.addEventListener('touchstart', handleMouseDown);
-			node.addEventListener('touchend', handleMouseUp);
+			node.addEventListener('mousedown', handleMouseDown, { passive: true });
+			node.addEventListener('mouseup', handleMouseUp, { passive: true });
+			node.addEventListener('touchstart', handleMouseDown, { passive: true });
+			node.addEventListener('touchend', handleMouseUp), { passive: true };
 		}
 	};
 };

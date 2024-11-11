@@ -1,14 +1,12 @@
-// import type { BlurParams } from 'svelte/transition';
-// import type { BlurParams } from 'svelte/transition';
 import type * as t from 'svelte/transition';
 import * as e from 'svelte/easing';
 import type { RotateParams, ScaleXYParams } from '$lib';
 import type { Options } from '$dlib/params';
 
-type ParamObject<T = any> = {
+export type ParamObject<T extends object = object> = {
 	title: string;
 	options: Options;
-	params: T | any;
+	params: T;
 };
 
 type StringEasing<T> = Omit<T, 'easing'> & { easing: keyof typeof e };

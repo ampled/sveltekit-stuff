@@ -8,6 +8,7 @@
 	import DemoContainer from '$dlib/DemoContainer.svelte';
 	import Params from '$dlib/Params.svelte';
 	import * as tParams from './transitionParams';
+	import { onMount } from 'svelte';
 
 	let { draw, crossfade, ...otherTransitions } = t;
 
@@ -37,7 +38,7 @@
 		}
 	};
 
-	let show = true;
+	let show = $state(true);
 
 	let demoParamsOptions = {
 		transition: { choices: Object.keys(transitions) },
@@ -48,38 +49,42 @@
 
 	// demoparams
 	let transitionKey = 'rotate' as keyof typeof transitions;
-	let transition = transitions[transitionKey];
-	let transitionParamObject = tParams[transitionKey];
+	let transition = $state(transitions[transitionKey]);
+	let transitionParamObject = $state(tParams[transitionKey]);
 	let origin = 'origin-center';
-	let width = 128;
-	let height = 128;
-	let transitionParams = { ...transitionParamObject?.params };
-	let transitionParamOptions = { ...transitionParamObject?.options };
+	// let width = $state(128);
+	// let height = $state(128);
 
-	let demoParams = {
+	let transitionParams = $state<{ easing: keyof typeof easings }>({
+		easing: 'backOut'
+	});
+	onMount(() => {
+		transitionParams = { ...transitionParamObject?.params };
+		transitionParamOptions = { ...transitionParamObject?.options };
+	});
+	// svelte-ignore state_referenced_locally
+	let transitionParamOptions = $state({ ...transitionParamObject?.options });
+
+	let demoParams = $state({
 		transition: transitionKey,
 		origin: 'origin-center',
-		width,
-		height
-	};
+		width: 128,
+		height: 128
+	});
 
-	$: easing = easings[transitionParams?.easing as keyof typeof easings];
-
-	$: {
-		console.log('transitionparams changed:', transitionParams);
-	}
+	let easing = $derived(easings[transitionParams?.easing as keyof typeof easings]);
 
 	function onParamsChange(e: any) {
 		const newParams = e.detail;
 		transitionParams = { ...newParams };
 	}
 
-	let prevTransition = demoParams.transition;
+	let prevTransition = $state<keyof typeof transitions>('rotate');
 	function onDemoParamsChange(e: any) {
 		console.log('demo params change!!', e);
 		const newDemoParams = { ...e.detail } as typeof demoParams;
-		width = newDemoParams.width;
-		height = newDemoParams.height;
+		// width = newDemoParams.width;
+		// height = newDemoParams.height;
 		origin = newDemoParams.origin;
 		demoParams = { ...newDemoParams };
 		if (newDemoParams.transition !== prevTransition) {
@@ -92,23 +97,23 @@
 	}
 </script>
 
-<Page title="scaleXY">
+<Page title="Playground">
 	<p>Test some transitions</p>
 
 	<DemoContainer title="Playground">
-		<div class="bg-green-400 text-black">
+		<div class="bg-green-400 text-black p-2 font-bold">
 			transition: {transition.name}
 		</div>
 		<div class="w-full flex flex-row items-center justify-start gap-20">
 			<div class="flex flex-col gap-4">
 				<button
 					class="bg-green-400 text-black rounded-lg"
-					on:click={() =>
+					onclick={() =>
 						console.log({
 							transitionParams
 						})}>debug</button
 				>
-				<button class="bg-green-400 text-black rounded-lg" on:click={() => (show = !show)}
+				<button class="bg-green-400 text-black rounded-lg" onclick={() => (show = !show)}
 					>hide / show</button
 				>
 
@@ -116,22 +121,22 @@
 					title="Options"
 					params={demoParams}
 					options={demoParamsOptions}
-					on:change={onDemoParamsChange}
+					onchange={onDemoParamsChange}
 				/>
 
 				<Params
 					title={transitionParamObject.title}
 					params={transitionParams}
 					options={transitionParamOptions}
-					on:change={onParamsChange}
+					onchange={onParamsChange}
 				/>
 			</div>
 			<div
 				class="flex flex-col items-center justify-center relative gap-4 bg-slate-300 w-full p-14 h-full"
 			>
 				<div
-					style="min-width: {width}px;
-				min-height: {height}px;"
+					style="min-width: {demoParams.width}px;
+				min-height: {demoParams.height}px;"
 					class="relative w-full basis-full h-32 flex flex-row items-center justify-center bg-slate-300 mb-12 rounded-md"
 				>
 					{#key transitionParams}

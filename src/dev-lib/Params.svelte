@@ -81,8 +81,6 @@
 	);
 
 	function paramChange(e: Event | InputEvent, param: (typeof parameters)[number]) {
-		console.log('paramChange');
-
 		const target = e.target as HTMLInputElement;
 		const p = { ...params };
 

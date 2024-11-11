@@ -26,10 +26,10 @@
 <Page title="Longpress">
 	<Code code={example} />
 	<DemoContainer>
-		<Params {params} />
+		<Params bind:params />
 
 		<div
-			use:longpress={time}
+			use:longpress={params.time}
 			onlong={handleLongPress}
 			class="flex flex-col w-64 h-64 bg-orange-950 text-pink-400 items-center justify-center whitespace-pre text-center rounded-lg shadow-lg select-none"
 		>
