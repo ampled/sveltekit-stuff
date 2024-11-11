@@ -1,12 +1,12 @@
-export type FirstArgOf<T> = T extends (first: infer FirstArgument, ...args: any[]) => any
+export type FirstArgOf<T> = T extends (first: infer FirstArgument, ...args: unknown[]) => unknown
 	? FirstArgument
 	: never;
 
 export type SecondArgOf<T> = T extends (
-	first: any,
+	first: unknown,
 	second: infer SecondArgument,
-	...args: any[]
-) => any
+	...args: unknown[]
+) => unknown
 	? SecondArgument
 	: never;
 
@@ -16,6 +16,7 @@ export type SecondArgOf<T> = T extends (
  */
 export type Prettify<T> = {
 	[K in keyof T]: T[K];
+	// eslint-disable-next-line @typescript-eslint/ban-types
 } & {};
 
 export type Optional<T> = T | undefined;
