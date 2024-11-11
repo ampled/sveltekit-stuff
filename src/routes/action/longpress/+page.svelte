@@ -1,13 +1,14 @@
 <script lang="ts">
 	import Code from '$dlib/Code.svelte';
 	import example from './example.txt?raw';
-	import { longpress, type LongpressEvent } from '$lib/action/longpress';
+	import { longpress } from '$lib/action/longpress';
 	import Page from '$dlib/Page.svelte';
 	import DemoContainer from '$dlib/DemoContainer.svelte';
+	import Params from '$dlib/Params.svelte';
 
 	let text = $state('click and hold here');
 
-	function handleLongPress(e: LongpressEvent) {
+	function handleLongPress() {
 		text = 'nice you did it';
 
 		setTimeout(() => {
@@ -16,20 +17,16 @@
 	}
 
 	let time = $state(200);
+
+	let params = $state({
+		time: 200
+	});
 </script>
 
 <Page title="Longpress">
 	<Code code={example} />
 	<DemoContainer>
-		<label class="flex flex-col">
-			<b>longpress time (ms)</b>
-			<input type="range" bind:value={time} max={5000} min={100} />
-			<input
-				class="border border-black bg-white text-black dark:bg-black dark:text-white"
-				type="number"
-				bind:value={time}
-			/>
-		</label>
+		<Params {params} />
 
 		<div
 			use:longpress={time}

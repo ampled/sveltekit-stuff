@@ -1,54 +1,12 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
-	import { rotate, type RotateParams } from '$lib/transition/rotate';
+	import { rotate } from '$lib/transition/rotate';
 	import * as easings from 'svelte/easing';
 	import code from './example.txt?raw';
 	import Code from '$dlib/Code.svelte';
 	import Page from '$dlib/Page.svelte';
-	import NumberInput from '$dlib/NumberInput.svelte';
 	import { transformOrigins } from '../origins';
-	import type { Snapshot } from './$types';
 	import DemoContainer from '$dlib/DemoContainer.svelte';
-
-	const easingOptions = Object.keys(easings) as (keyof typeof easings)[];
-
-	let show = $state(true);
-
-	let duration = $state(250);
-	let easingString: keyof typeof easings = $state('backOut');
-	let easing;
-	run(() => {
-		easing = easings[easingString];
-	});
-	let rotation = $state(45);
-	let opacity = $state(0);
-	let origin: (typeof transformOrigins)[number] = $state('origin-center');
-	let x = $state(0);
-	let y = $state(0);
-
-	let options = $derived({
-		duration,
-		easing,
-		rotation,
-		opacity,
-		x,
-		y
-	} as RotateParams);
-
-	export const snapshot: Snapshot = {
-		capture: () => ({ duration, easingString, rotation, opacity, origin, x, y }),
-		restore: (value) => ({ duration, easingString, rotation, opacity, origin, x, y } = value)
-	};
-
-	function reset() {
-		duration = 250;
-		easing = easings.backOut;
-		rotation = 45;
-		opacity = 0;
-		x = 0;
-		y = 0;
-	}
+	import Params from '$dlib/Params.svelte';
 
 	const rotateOptions = `interface RotateParams {
   delay?: number;
@@ -59,6 +17,75 @@
   x?: number;
   y?: number;
 }`;
+
+	const paramOptions = {
+		rotateParams: {
+			in: {
+				duration: { step: 100, min: 0, max: 10000 },
+				easing: { choices: Object.keys(easings) },
+				rotation: { step: 10, min: 1, max: 1080 },
+				opacity: { step: 0.05, min: 0, max: 1 },
+				origin: { choices: transformOrigins, custom: true },
+				show: { custom: true },
+				x: { unit: 'px' },
+				y: { unit: 'px' }
+			},
+			out: {
+				expand: false,
+				duration: { step: 100, min: 0, max: 10000 },
+				easing: { choices: Object.keys(easings) },
+				rotation: { step: 10, min: 1, max: 1080 },
+				opacity: { step: 0.05, min: 0, max: 1 },
+				origin: { choices: transformOrigins, custom: true },
+				show: { custom: true },
+				x: { unit: 'px' },
+				y: { unit: 'px' }
+			}
+		},
+		demo: {
+			origin: { choices: transformOrigins },
+			width: { max: 450, min: 50, step: 10 },
+			height: { max: 450, min: 50, step: 10 }
+		}
+	};
+
+	let demoParams = $state({
+		show: true,
+		origin: 'origin-center',
+		width: 128,
+		height: 128
+	});
+	let rotateParams = $state({
+		in: {
+			duration: 250,
+			easing: 'backOut' as keyof typeof easings,
+			rotation: 45,
+			opacity: 0,
+			x: 0,
+			y: 0
+		},
+		out: {
+			duration: 250,
+			easing: 'backOut' as keyof typeof easings,
+			rotation: 45,
+			opacity: 0,
+			x: 0,
+			y: 0
+		}
+	});
+
+	let easingIn = $derived(easings[rotateParams.in.easing]);
+	let easingOut = $derived(easings[rotateParams.in.easing]);
+	let show = $derived(demoParams.show);
+
+	function onParamsChange(
+		e: CustomEvent<
+			Record<string | number, string | number | boolean | object | Function> | undefined
+		>
+	): void {
+		console.log(e);
+		// throw new Error('Function not implemented.');
+	}
 </script>
 
 <Page title="rotate">
@@ -70,60 +97,34 @@
 	<Code code={rotateOptions} svelte={false} title="Options" />
 
 	<DemoContainer>
-		<div class="flex flex-col items-center justify-center relative gap-4">
-			<div
-				class="flex flex-col md:flex-row gap-4 items-start md:items-start justify-start flex-wrap"
-			>
-				<NumberInput title="rotation (degrees)" bind:value={rotation} max={1080} min={-1080} />
-				<NumberInput title="duration (ms)" bind:value={duration} max={5000} min={10} />
-				<NumberInput title="opacity" bind:value={opacity} max={1} min={0} step={0.1} />
-				<NumberInput title="x" bind:value={x} slider={false} />
-				<NumberInput title="y" bind:value={y} slider={false} />
-
-				<div>
-					<label class="flex flex-col">
-						<b>easing</b>
-						<select
-							bind:value={easingString}
-							class="rounded text-black dark:text-white dark:bg-black"
-						>
-							{#each easingOptions as option}
-								<option value={option}>{option}</option>
-							{/each}
-						</select>
-					</label>
-					<label class="flex flex-col">
-						<b>transform origin</b>
-						<select bind:value={origin} class="rounded text-black dark:text-white dark:bg-black">
-							{#each transformOrigins as option}
-								<option value={option}>{option}</option>
-							{/each}
-						</select>
-					</label>
-				</div>
+		<div
+			class="relative w-full basis-full h-fit flex flex-col sm:flex-row items-center gap-20 py-4 flex-nowrap"
+		>
+			<div class="flex flex-col gap-4">
+				<Params
+					title="Demo Options"
+					bind:params={demoParams}
+					options={paramOptions.demo}
+					onchange={onParamsChange}
+				/>
+				<Params
+					title="RotateParams"
+					bind:params={rotateParams}
+					options={paramOptions.rotateParams}
+				/>
 			</div>
-
 			<div
-				class="relative w-full basis-full h-32 flex flex-row items-center justify-center gap-6 py-4"
+				class="w-full h-full basis-full min-h-full flex items-center justify-center bg-slate-300 p-14"
 			>
-				<div class="flex gap-1">
-					<button
-						onclick={() => (show = !show)}
-						class="bg-lime-600 text-white rounded-lg p-3 hover:bg-lime-400">hide / show</button
-					>
-					<button
-						class="border border-black rounded-lg p-4 dark:border-white hover:bg-lime-600"
-						onclick={reset}
-					>
-						reset params
-					</button>
-				</div>
-				<div class="h-36 w-32">
-					{#key options}
+				<div class="transition-all duration-1000" style:height={demoParams.height + 'px'}>
+					{#key rotateParams}
 						{#if show}
 							<div
-								class={`w-32 h-32 bg-orange-500 rounded-md text-orange-950 text-center p-2 flex flex-col items-center justify-center text-2xl ${origin}`}
-								transition:rotate={options}
+								class={`bg-orange-500 flex items-center justify-center rounded-md text-orange-950 transition-all duration-1000 text-center p-2 text-2xl ${demoParams.origin}`}
+								style="width: {demoParams.width}px;
+										height: {demoParams.height}px;"
+								in:rotate|local={{ ...rotateParams.in, easing: easingIn }}
+								out:rotate|local={{ ...rotateParams.out, easing: easingOut }}
 							>
 								😵‍💫
 							</div>

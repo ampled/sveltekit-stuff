@@ -16,7 +16,7 @@ export function rotate(
 	node: Element,
 	{
 		delay = 0,
-		duration = 250,
+		duration = 400,
 		easing = backOut,
 		rotation = 180,
 		opacity = 0,

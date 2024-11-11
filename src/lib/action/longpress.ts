@@ -1,4 +1,9 @@
-export function longpress(node: HTMLElement, time = 200) {
+import type { Action } from 'svelte/action';
+
+export const longpress: Action<HTMLElement, number, { onlong: () => void }> = (
+	node: HTMLElement,
+	time = 200
+) => {
 	let timeoutPtr: number;
 	let _time = time;
 	function handleMouseDown(e: MouseEvent | TouchEvent) {
@@ -41,13 +46,4 @@ export function longpress(node: HTMLElement, time = 200) {
 			node.addEventListener('touchend', handleMouseUp);
 		}
 	};
-}
-
-export type LongpressEvent<T = any> = CustomEvent<T>;
-declare global {
-	namespace svelteHTML {
-		interface HTMLAttributes<T extends EventTarget> {
-			'on:long'?: (event: LongpressEvent<T>) => void;
-		}
-	}
-}
+};
