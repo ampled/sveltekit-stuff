@@ -1,8 +1,7 @@
-import type { SecondArgOf } from '$lib/types';
 import { fly } from 'svelte/transition';
 
 export const ROUTE_TRANSITION = fly;
-export const ROUTE_TRANSITION_PARAMS: SecondArgOf<typeof ROUTE_TRANSITION> = {
+export const ROUTE_TRANSITION_PARAMS: Parameters<typeof ROUTE_TRANSITION>[1] = {
 	// Infers FlyParams
 	duration: 250,
 	opacity: 0,

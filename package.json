@@ -44,7 +44,7 @@
 	"devDependencies": {
 		"@sveltejs/kit": "^2.5.27",
 		"@sveltejs/package": "2.3.7",
-		"@skeletonlabs/skeleton": "^1.5.1",
+		"@skeletonlabs/skeleton": "^2.10.3",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@types/lodash-es": "^4.17.7",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
